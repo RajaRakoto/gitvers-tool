@@ -4,7 +4,7 @@
 
 
 #dev index
-   # ... //test = non-functional code in development phase (-primordial)
+   # ... //test = non-functional code in development phase (-essential)
    # ... //test * = non-functional code in development phase (+essential)
    # ... //del = code to be deleted (later) if no use
    # ... //bug = code bug to fix
@@ -176,7 +176,7 @@ def helpssh():
   temp = raw_input(style.DARKCYAN+"Press [ENTER] to return to the SSH menu ..."+style.END)
   ssh()
 
-#installssh //test
+#installssh //OK
 def installssh():
   print(" \n ")
   print(style.GREEN+"openssh-server installation ... [loading]"+style.END)
@@ -192,7 +192,7 @@ def installssh():
   temp = raw_input(style.DARKCYAN+"Press [ENTER] to return to the SSH menu ..."+style.END)
   ssh()
 
-#genssh //test
+#genssh //OK
 def genssh():
   print(" \n ")
   print(style.BOLD+"Enter your name, ssh will use your name as the label of the generated ssh key ... "+style.END)
@@ -205,7 +205,7 @@ def genssh():
   temp = raw_input(style.DARKCYAN+"Press [ENTER] to return to the SSH menu ..."+style.END)
   ssh()
 
-#bckssh //test
+#bckssh //OK
 def bckssh():
   print(" \n ")
   os.system("sudo mkdir -p /etc/ssh/bck && cd /etc/ssh/ && cp -r ssh_config sshd_config bck/")
@@ -214,7 +214,7 @@ def bckssh():
   temp = raw_input(style.DARKCYAN+"Press [ENTER] to return to the SSH menu ..."+style.END)
   ssh()
 
-#ssh_config //test
+#ssh_config //OK
 def ssh_config():
   print(" \n ")
   os.system("sudo nano /etc/ssh/ssh_config")
@@ -223,7 +223,7 @@ def ssh_config():
   temp = raw_input(style.DARKCYAN+"Press [ENTER] to return to the SSH menu ..."+style.END)
   ssh()
 
-#sshd_config //test
+#sshd_config //OK
 def sshd_config():
   print(" \n ")
   os.system("sudo nano /etc/ssh/sshd_config")
@@ -232,7 +232,7 @@ def sshd_config():
   temp = raw_input(style.DARKCYAN+"Press [ENTER] to return to the SSH menu ..."+style.END)
   ssh()
 
-#issue_net //test
+#issue_net //OK
 def issue_net():
   print(" \n ")
   os.system("sudo nano /etc/issue.net")
@@ -241,7 +241,7 @@ def issue_net():
   temp = raw_input(style.DARKCYAN+"Press [ENTER] to return to the SSH menu ..."+style.END)
   ssh()
 
-#ssh_service //test
+#ssh_service //OK
 def ssh_service():
   print(" \n ")
   os.system("sudo systemctl restart ssh")
@@ -256,7 +256,7 @@ def ssh_service():
   temp = raw_input(style.DARKCYAN+"Press [ENTER] to return to the SSH menu ..."+style.END)
   ssh()
 
-#ssh_agent_pid //test
+#ssh_agent_pid //OK
 def ssh_agent_pid():
   print(" \n ")
   os.system("eval '$(ssh-agent -s)'")
@@ -265,7 +265,7 @@ def ssh_agent_pid():
   temp = raw_input(style.DARKCYAN+"Press [ENTER] to return to the SSH menu ..."+style.END)
   ssh()
 
-#ssh_agent //test
+#ssh_agent //OK
 def ssh_agent():
   print(" \n ")
   print(style.BOLD+"Enter the full path of the location of your private ssh key (with its name) ... (it should be displayed below if you haven't changed the location)"+style.END)
@@ -278,7 +278,7 @@ def ssh_agent():
   temp = raw_input(style.DARKCYAN+"Press [ENTER] to return to the SSH menu ..."+style.END)
   ssh()
 
-#ufw //test
+#ufw //OK
 def ufw():
   print(" \n ")
   os.system("sudo ufw allow ssh")
@@ -287,7 +287,7 @@ def ufw():
   temp = raw_input(style.DARKCYAN+"Press [ENTER] to return to the SSH menu ..."+style.END)
   ssh()
 
-#pubkey //test
+#pubkey //OK
 def pubkey():
   print(" \n ")
   os.system("cat ~/.ssh/id_rsa.pub")
@@ -297,7 +297,7 @@ def pubkey():
   temp = raw_input(style.DARKCYAN+"Press [ENTER] to return to the SSH menu ..."+style.END)
   ssh()
 
-#authorized_keys() //test
+#authorized_keys() //OK
 def authorized_keys():
   print(" \n ")
   print("Enter the name of the remote machine (ex: raja@192.168.8.100) ...")
@@ -567,7 +567,7 @@ def service():
   done()
   choiceMain()
 
-#keywordsFR //test
+#keywordsFR //OK
 def keywordsFR():
   print(style.BOLD+style.GREEN+" Keywords :"+style.END)
   print(style.BOLD+"all|*"+style.END+" = tous les fichiers & repertoires")
@@ -979,7 +979,7 @@ def configname():
   newName = raw_input(style.GREEN + style.BOLD +"[🅽🅴🆆-🅽🅰🅼🅴 > " + style.END)
   choiceMenu()
 
-#initBranch //test
+#initBranch //OK
 def initBranch():
   print(" \n ")
   print(style.BOLD+"Please enter the name of the initial branch to use [default = master] :)"+style.END)
@@ -990,7 +990,7 @@ def initBranch():
   time.sleep(0.35)
   choiceMenu()
 
-#rebase //test
+#rebase //OK
 def rebase():
   print(" \n ")
   os.system("git config --global branch.autosetuprebase always".format(zen))
@@ -1235,7 +1235,7 @@ def readme():
   
   choiceMenu()
 
-#noteFR //test
+#noteFR //OK
 def noteFR():
   print(style.BOLD + "\n              [GIT-NOTE]" + style.END)
   print("========================================")
@@ -1261,7 +1261,7 @@ def note():
   if mainPut == "note" or mainPut == 'NOTE' or mainPut == "n" or mainPut == 'N':
     choiceMain()
 
-#note1 //test
+#note1 //OK
 def note1FR():
   noteFR()
   choiceMenu()
@@ -2016,7 +2016,7 @@ def diffstash():
   done()
   choiceMenu()
 
-#branchstash //test
+#branchstash //OK
 def branchstash():
 
   print(" \n ")
@@ -3001,10 +3001,58 @@ while (True):
       print(style.BOLD+"* ssh-server:"+style.END+" git@github.com:RajaRakoto/gitvers-tool.git OR raja@192.168.8.100:/home/raja/Project/Server/gitvers-tool")
       print(style.BOLD+"* https-server:"+style.END+" https://github.com/RajaRakoto/gitvers-tool.git")
       print(" \n ")
+
+      #sever list
+      print(style.BOLD+"[SERVER LIST (used)]--------------------------------------------------------"+style.END)
+      os.system("touch ~/Project/remote.log && cat ~/Project/remote.log")
+      print("\nNOTE: Enter 'clear' in the [SERVER> prompt to clean up the entire server list")
+      print(style.BOLD+"----------------------------------------------------------------------------"+style.END)
       remote = raw_input(style.GREEN+"[🆂🅴🆁🆅🅴🆁 > "+style.END)
+
+      #clear server list
+      if remote == 'clear' or remote == 'CLEAR':
+        print(" \n ")
+        os.system("cd /tmp && rm -rf remote.log")
+        os.system("cd ~/Project && rm -rf remote.log")
+        print(style.GREEN+"all server list cleared ... [done]"+style.END)
+        #show server list again (verification)
+        print(style.BOLD+"[SERVER LIST (used)]--------------------------------------------------------"+style.END)
+        os.system("touch ~/Project/remote.log && cat ~/Project/remote.log")
+        print("\nNOTE: Enter 'clear' in the [SERVER> prompt to clean up the entire server list")
+        print(style.BOLD+"----------------------------------------------------------------------------"+style.END)
+        remote = raw_input(style.GREEN+"[🆂🅴🆁🆅🅴🆁 > "+style.END)
+
       print(" \n ")
       print(style.GREEN+"origin ID = {0}".format(origin)+style.END)
       time.sleep(1)
+
+      #server log //test*
+      #create file 'remote.log' in /tmp
+      if temp == '0': #github-https
+        serverLog = open(r"/tmp/remote.log","a +")
+        serverLog.write("[project="+zen+"][github-https]-> "+remote+"\n")
+        serverLog.close()
+        os.system("cat /tmp/remote.log > ~/Project/remote.log")
+      if temp == '1': #github-ssh
+        serverLog = open(r"/tmp/remote.log","a +")
+        serverLog.write("[project="+zen+"][github-ssh]-> "+remote+"\n")
+        serverLog.close()
+        os.system("cat /tmp/remote.log > ~/Project/remote.log")
+      #import 'remote.log' to ~/Project
+      if temp == '2': #bitbucket-https
+        serverLog = open(r"/tmp/remote.log","a +")
+        serverLog.write("[project="+zen+"][bitbucket-https]-> "+remote+"\n")
+        serverLog.close()
+        os.system("cat /tmp/remote.log > ~/Project/remote.log")
+      if temp == '3': #bitbucket-ssh
+        serverLog = open(r"/tmp/remote.log","a +")
+        serverLog.write("[project="+zen+"][bitbucket-ssh]-> "+remote+"\n")
+        serverLog.close()
+        os.system("cat /tmp/remote.log > ~/Project/remote.log")
+        
+      print(style.GREEN+"Server update to remote.log ... [done]"+style.END)
+      time.sleep(1)
+      #checking ID
       print(style.GREEN+"Checking origin ID ... [done]"+style.END)
       time.sleep(1)
       os.system("cd ~/Project/{0} && git remote add {1} {2}".format(zen,origin,remote)) #lien avec le projet
