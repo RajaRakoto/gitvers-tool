@@ -1,0 +1,144 @@
+            ###################################
+            #### tested with UBUNTU v20.10 ####
+            ###################################
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~NOTE(intro): Before entering the installation of openSSH, make sure that the server/client machine is connected to each other
+to check:
+
+# check IPadress (ipv4) server/client
+    |__$ ifconfig (inet: x.x.x.x)
+or  |
+    |__$ ip a (inet: x.x.x.x)
+
+# server side
+    |__$ ping <IPadress_client> (ex: ping 192.168.8.101)
+
+# client side
+    |__$ ping <IPadress_server> (ex: ping 192.168.8.100)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+         #############################################
+         #### OPENSSH INSTALLATION (pre-required) ####
+         #############################################
+
+## client side
+    |__$ sudo apt-get install openssh-client
+
+## server side
+    |__$ sudo apt-get install openssh-server
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                    ################
+                    #### CONFIG ####
+                    ################
+
+local: /etc/ssh/
+## Create a backup of the ssh_config and sshd_config config files
+    |__ $ sudo mkdir -p /etc/ssh/bck && cd /etc/ssh/ && cp -r ssh_config sshd_config bck/
+
+## sshd_config (base)
+    |
+    |__port 22 (avoid inconvenience with robots that scan the Internet)
+    |__PubkeyAuthentication yes (auth. by public key)
+    |__PermitRootLogin no (root access)
+
+## ssh_config (base)
+    |
+    |__port 22
+    |__ServerAliveInterval 240 (= 4mn, So that the client sends information to the server and that the latter does not cut the connection)
+
+## Banner /etc/issue.net (message in login server)
+
+## restart service ssh (client/server)
+    |__ $ sudo systemctl restart sshd.service
+    |__ $ sudo systemctl restart ssh.service
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                    #################
+                    #### SSH key ####
+                    #################
+
+## generate ssh key (RSA crypted)
+    |__ $ ssh-keygen -t rsa | ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+        > id_rsa.pub = public key (can be published)
+        > id_rsa = private key (keep safe)
+
+this client-side section (in braces) is recommended when the ssh_config & sshd_config configuration of networked machines is complete
+{
+
+## on the remote machine (client)
+|__ # id_rsa.pub (from the client), must be sent to your remote server to be allowed to connect, to be done (quickly):
+| |__ $ ssh-copy-id id @ host (ex: ssh-copy-id raja@192.168.8.100)
+|       > host = IPadress (192.168.8.100) of the server
+|       > id = username (raja)
+|
+|__ # a password confirmation (from the server) will be requested in order to connect
+|   |__notif (if key added) = Number of key(s) added: x (x = number of public key added)
+|
+| __ # Otherwise (other method): manually add the public key 'id_rsa.pub' (from the client) in '~/.ssh/authorized_keys' (from the server) in order to be authorized to connect
+
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                    ###################
+                    #### SSH agent ####
+                    ###################
+
+#Before adding the new SSH key to the ssh agent,
+# first make sure the ssh agent is running by running:
+    |__ $ eval "$ (ssh-agent -s)"
+        > this command returns agent pid xxxxxx
+
+# Once the ssh agent is running,
+#the following command will add the new SSH key to the local SSH agent.
+    |__ $ ssh-add /<path>/id_rsa (only private key can be secured via ssh-agent)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                    ###################
+                    #### USAGE ssh ####
+                    ###################
+
+##service
+#Activate:
+    |__$ sudo systemctl start ssh
+
+#Stop:
+    |__$ sudo systemctl stop ssh
+
+#Revive:
+    |__$ sudo systemctl restart ssh
+    |__$ sudo systemctl restart sshd.service
+    |__$ sudo systemctl restart ssh.service
+
+#Log:
+    |__$ systemctl status ssh
+
+## remote (remote access)
+    |__$ ssh 'id @ host' (id = username | host = IPadress | -p <port>)
+# ex0:
+    |__$ ssh 'raja@192.168.8.100'
+# ex1:
+    |__$ ssh 'raja@192.168.8.100' -p 22
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                    #################
+                    #### UFW ssh ####
+                    #################
+
+# to open the ssh port in ufw:
+    |__ $ sudo ufw allow ssh
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~ NOTE (secure):
+
+    [passphrase]
+The next prompt will ask for a secure passphrase.
+A passphrase will add an extra layer of security to SSH and
+will be required each time the SSH key is used. If someone accesses
+the computer on which the private keys are stored, he can also access
+any system that uses this key.
+Adding a passphrase to the keys will prevent this scenario
+
+    [ssh-agent]
+Another program that is part of the SSH suite of tools is ssh-agent.
+The ssh agent is responsible for holding private keys.
+Think of it like a key chain. In addition to holding private keys,
+it also processes SSH request signing requests with
+private keys so that private keys are never transmitted in an insecure manner
+
+    [ufw]
+Ubuntu comes with a firewall configuration tool called UFW.
+If the firewall is enabled on your system, make sure to open the SSH port

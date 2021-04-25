@@ -1,0 +1,78 @@
+                        #####################################
+                        ######## Github & Bitbucket #########
+                        #####################################
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#Service de Github: Github vous permet d'heberger une infinitE de projet tant que ce dernier reste en opensource, il faudra payer pour des projets privEs et le prix depend du nombre de depot que vous avez
+
+#Service de Bitbucket: permet d'heberger un projet privE gratuit. En revanche, vous etes limitEs au niveau du nombre de collaborateur, au fur et a mesure votre projet et votre equipe grandi, vous serez obliger de payer
+
+#Pour utiliser leurs services (Github & Bitbucket):
+  > Vous devriez creer un compte Github & Bitbucket
+  > Creer une cle SSH (utile pour vous identifier lors d'un push & pull) et importer votre cle 'PUBLIC' dans le parametre => onglet 'securitE' => ssh keys
+    |
+    |-> note: vous pouvez generer une cle SSH en entrant dans le menu SSH de ce script)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                ###################
+                                ##### ISSUES ######
+                                ###################
+
+#issues: un systeme de communication permettant de se tenir au courant des problemes rencontrEs sur votre projet
+  > On peut creer un issue en allant dans le menu issue de votre serveur git:
+    |
+    |__imaginons qu'un developpeur a creer un issue #1 avec une bref description de son probleme (le #1 est le tag de l'issue)
+    |
+    |__lorsqu'un autre developpeur a resolu le probleme, il devrai ajouter lors d'un commit ce qu'on appel un nommanclature (norme/nommage d'un commit) comme ceci:
+    |  |__$ git commit -i -m "fixes #1, <votre commentaire>"
+    |  |__$ git push origin <branch>
+    |
+    |__ce type de commit envoye au systeme issue que le probleme avec tag #1 a ete bien resolu (status => RESOLVED)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                 #################
+                                 ##### FORK ######
+                                 #################
+
+#fork: un mirroir du projet original, i-e de creer son propre version du projet en copiant l'original
+  > Lorsque vous faite un fork sur un projet, vous aller recevoir une nouvelle copie du projet (mirroir)
+    |
+    |__la difference entre fork et clone, c'est comme vous avez votre propre serveur du depot, vous allez travailler dans votre propre depot et il n'y a aucune trace du depot de l'autre auteur. De plus, si vous avez juste cloner le depot original, vous ne pouvez pas faire un commit car c'est en mode lecture seulement. Cependant, vous pouvez le faire sur le depot mirroir
+    |
+    |__vous pouvez maintenant cloner le depot en tapant la commande:
+    |  |__$ git clone <https url>
+    |
+    |__il est fortement conseiller de travailler dans une autre branche (pas dans la branche master), pour eviter un conflit lors d'un merge
+       |__le depot original ne verra pas encore votre nouvelle branche car vous ne fait qu'une modification sur le mirroir de ce dernier (principe du fork)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                             #########################
+                             ##### PULL-REQUEST ######
+                             #########################
+
+#pull-request: globalement, ce systeme sert a demander a l'admninistrateur du depot original d'accepter votre(vos) modification(s) dans le depot mirroir
+  > Vous choisissez dans quelle branche vous voulez fusionner votre(vos) modification(s)
+     | |
+     | |__base fork: c'est le nom du depot original
+     | |__base: master (la branche auquel vous voulez fusionner avec la tienne 'compare')
+     | |
+     | |__head fork: le nom du depot mirroir
+     | |__compare: la branche sur lequel vous avez fait votre(vos) modification(s)
+     |
+     |-> note: votre message a propos du pull request devrai etre le plus claire possible afin que l'admin du depot original aye confiance en vous, ainsi accepter ce dernier, vous devez toujours preciser ces 3 points:
+        
+                 * De quoi sagit votre requette ?
+                 * Pourquoi tu as fait ce modification ?
+                 * Pourquoi il devra l'accepter ?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                             #########################
+                             ##### FAST-FORWARD ######
+                             #########################
+
+#fast-forward: si vous delaisser un peu votre depot mirroir, il est possible que le depot original est en etat d'avance, et que plutard vous voulez mettre a jour le votre, la solution est...
+  > Etape 1: ajouter un nouvel remote appelE 'upstream' (un terme consacrE pour le MAJ d'un fork), pour ce faire:
+            |__$ git remote add upstream <https url> (le lien du depot original) 
+            |__$ git remote -v (pour verifier le remote)
+  > Etape 2: recuperer la branche master (+infos) qui se situe sur le remote nouvellement creer 'upstream'
+            |__$ git fetch upstream
+            |__$ git branch -a (pour verifier la liaison de la branche distante et le remote 'upstream')
+  > Etape 3: le fast-forward - il s'agit de mettre a jour (fusionner) votre depot mirroir avec le depot original
+            |__$ git merge upstream/master (il va automatiquement recuperer tous infos)
+
+[WARNING]>> Ne faite jamais de COMMIT sur votre branche MASTER meme si c'est un FORK qui vous appartient, si vous le faite, cela va bloquer le fast-forward (provoque un conflit de synchronisation)

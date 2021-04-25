@@ -1,0 +1,9 @@
+[NEW USER]
+    |_STEP1: Create a bitbucket account
+    |_STEP2: Generate an SSH key (with a label)
+
+[NEW PROJECT]
+    |_STEP3: Create a workspace
+    |_STEP4: Create a repository
+    |_STEP4: Import your public key into your bitbucket account => personal settings => SSHkeys
+    |_STEP5: Import your local repository to bitbucket

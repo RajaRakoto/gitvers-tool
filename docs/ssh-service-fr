@@ -1,0 +1,144 @@
+            ###################################
+            #### tested with UBUNTU v20.10 ####
+            ###################################
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~NOTE(intro): Avant d'entrer dans l'installation de openSSH, assurer vous que la machine serveur/client est connectE entre eux
+pour verifier:
+
+# check IPadress(ipv4) serveur/client
+    |__$ ifconfig (inet: x.x.x.x)
+ou  |
+    |__$ ip a (inet: x.x.x.x)
+
+# cotE serveur
+    |__$ ping <IPadress_client> (ex: ping 192.168.8.101)
+
+# cotE client
+    |__$ ping <IPadress_server> (ex: ping 192.168.8.100)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+         ###########################################
+         #### INSTALLATION OPENSSH (pre-requis) ####
+         ###########################################
+
+## cotE client
+    |__$ sudo apt-get install openssh-client
+
+## cotE serveur
+    |__$ sudo apt-get install openssh-server
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                    ################
+                    #### CONFIG ####
+                    ################
+
+local: /etc/ssh/
+## Creer un backup des fichiers de config ssh_config et sshd_config
+    |__$ sudo mkdir -p /etc/ssh/bck && cd /etc/ssh/ && cp -r ssh_config sshd_config bck/
+
+## Config de sshd_config (base) 
+    |
+    |__port 22 (eviter le desagrement avec les robots qui scannent Internet)
+    |__PubkeyAuthentication yes (auth. par public key)
+    |__PermitRootLogin no (acces root)
+
+## Config de ssh_config (base)
+    |
+    |__port 22
+    |__ServerAliveInterval 240 (=4mn, Pour que le client envoie des infos au server et que ce dernier ne coupe pas la liaison)
+
+## Banner /etc/issue.net (message in login server)
+
+## restart service ssh (client/serveur)
+    |__$ sudo systemctl restart sshd.service
+    |__$ sudo systemctl restart ssh.service
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                    #################
+                    #### SSH key ####
+                    #################
+
+## generate ssh key (RSA crypted)
+    |__$ ssh-keygen -t rsa | ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+        > id_rsa.pub = public key (peut etre publiE)
+        > id_rsa = private key (garder en securitE)
+
+cette section cotE client (entre accolade) est recommandE lorsque la configuration ssh_config & sshd_config des machines en reseau est terminE
+{
+
+## sur la machine distant (client)
+|__# id_rsa.pub (du client), doit être envoyé sur votre serveur distant pour etre authorisE a se connecter, pour se faire (rapidement):
+|    |__$ ssh-copy-id id@hote (ex: ssh-copy-id raja@192.168.8.100)
+|        > hote = IPadress (192.168.8.100) du serveur
+|        > id = username (raja)
+|
+|__# une confirmation par mot de passe (de la part du seveur) sera demandE afin de se connecter  
+|    |__notif(si cle ajoutE) = Number of key(s) added: x (x = nombre de cle public ajoutE)
+|
+|__# Sinon (autre methode): ajouter manuellement le public key 'id_rsa.pub' (du client) dans '~/.ssh/authorized_keys' (du serveur) afin d'etre authorisE a se connectE
+
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                    ###################
+                    #### SSH agent ####
+                    ###################
+
+# Avant d'ajouter la nouvelle clé SSH à l'agent ssh, 
+#assurez-vous d'abord que l'agent ssh est en cours d'exécution en exécutant:
+    |__$ eval "$(ssh-agent -s)"
+        > cette commande retourne agent pid xxxxxx
+
+# Une fois que l'agent ssh est en cours d'exécution, 
+# la commande suivante ajoutera la nouvelle clé SSH à l'agent SSH local.
+    |__$ ssh-add /<path>/id_rsa (seul private key peut etre securisE via ssh-agent)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                    ###################
+                    #### USAGE ssh #### 
+                    ###################
+
+## service
+# Activer:
+    |__$ sudo systemctl start ssh
+
+# Arrêter:
+    |__$ sudo systemctl stop ssh
+
+# Relancer:
+    |__$ sudo systemctl restart ssh 
+    |__$ sudo systemctl restart sshd.service
+    |__$ sudo systemctl restart ssh.service
+
+# Log:
+    |__$ systemctl status ssh
+
+## remote (acces a distance)
+    |__$ ssh 'id@hote' (id = username | hote = IPadress | -p <port>)
+# ex0:
+    |__$ ssh 'raja@192.168.8.100'
+# ex1:
+    |__$ ssh 'raja@192.168.8.100' -p 22
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                    #################
+                    #### UFW ssh ####
+                    #################
+
+# pour ouvrir le port ssh dans ufw:
+    |__$ sudo ufw allow ssh 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~NOTE(secure):
+
+    [passphrase]
+L'invite suivante demandera une phrase secrète sécurisée.
+Une phrase de passe ajoutera une couche de sécurité supplémentaire au SSH et 
+sera requise chaque fois que la clé SSH est utilisée. Si quelqu'un accède à 
+l'ordinateur sur lequel les clés privées sont stockées, il peut également accéder à 
+tout système qui utilise cette clé. 
+L'ajout d'une phrase de passe aux clés empêchera ce scénario
+
+    [ssh-agent]
+Le ssh-agent est un autre programme qui fait partie de la suite d'outils SSH. 
+L'agent ssh est responsable de la détention des clés privées. 
+Pensez-y comme un porte-clés. En plus de détenir des clés privées, 
+il traite également les demandes de signature de demandes SSH avec 
+les clés privées afin que les clés privées ne soient jamais transmises de manière non sécurisée
+
+    [ufw]
+Ubuntu est livré avec un outil de configuration de pare-feu appelé UFW. 
+Si le pare-feu est activé sur votre système, assurez-vous d'ouvrir le port SSH
