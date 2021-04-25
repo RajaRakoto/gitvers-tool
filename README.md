@@ -47,8 +47,6 @@ Raja
 
 A versioning tool using git in script version, allows you to quickly execute repetitive task commands in a single command. For newbies, I strongly suggest first of all to consult this document [https://git-scm.com/book/en/v2] in order to understand why we use git, what interest, and why the version control of a source code.
 
-=======================================================================================
-
 # Dependencies
     
     > git (required)
@@ -58,8 +56,6 @@ A versioning tool using git in script version, allows you to quickly execute rep
     > openssh-server & openssh-client (recommended)
     > Node.JS [>= 10.18.0] & NPM [>= 6.13.4] to use UNGIT (recommended for better visibility of your git project)
     > tilix (if necessary you must access your default shell, a question of efficiency)
-
-=======================================================================================
 
 # Extensions
     
@@ -74,8 +70,6 @@ gitflow is not yet integrated (for the time being) in gitvers-tool, but you can 
     - [input> flow
     - [flow> 2
     - you will see a web page on git flow and its usage
-
-=======================================================================================
 
 # Usage (gitvers-tool)
 
@@ -193,8 +187,6 @@ gitflow is not yet integrated (for the time being) in gitvers-tool, but you can 
 
 NOTE: some notes are available in french version, just add 'fr' at the end of the basic command to translate it (ex: notefr, servicefr, helpfr ...)
 
-=======================================================================================
-
 # How to read the syntax on shortcut commands ?
 It can be a bit difficult at first but over time and with more use of this script you end up memorizing the command shortcuts and making operations faster and more efficient with git (You can also consult the "git-note" (by typing 'note') to see the different executable commands).
 Of course, I haven't implemented all of the git functionality as these more complicated operations have to be done with native git commands. This script is intended to help new git users to integrate faster.
@@ -240,20 +232,23 @@ Of course, I haven't implemented all of the git functionality as these more comp
 
 NOTE: the "guide" folder contains animated .gif images to familiarize you with the script
 
-=======================================================================================
+# Pull Requests
+
+Pull requests are welcome! If you send a pull request, please:
+
+- Request to merge into the "dev" branch (*NOT* `master`)
+- Match the existing coding & commit conventions.
+- Include helpful comments to keep the barrier-to-entry low for people new to the project.
+- Write tests that cover your code as much as possible.
 
 # Collaborator
     
     > n/a
 
-=======================================================================================
-
 # Version
     
     > v1.0 beta
     > v1.1 (currently)
-
-=======================================================================================
 
 # Report
 
