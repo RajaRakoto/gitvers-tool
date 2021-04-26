@@ -36,13 +36,6 @@
 𝕥𝕙𝕖 𝕘𝕚𝕥𝕧𝕖𝕣𝕤-𝕥𝕠𝕠𝕝 𝕡𝕣𝕠𝕛𝕖𝕔𝕥
 v1.1
 =======================================================================================
-# Demo
-![ Alt text](guide/example_create_project(remote).gif) / ! [](guide/example_create_project(remote).gif)
-
-=======================================================================================
-# Author
-Raja
-
 # Description
 
 A versioning tool using git in script version, allows you to quickly execute repetitive task commands in a single command. For newbies, I strongly suggest first of all to consult this document [https://git-scm.com/book/en/v2] in order to understand why we use git, what interest, and why the version control of a source code.
@@ -229,8 +222,11 @@ Of course, I haven't implemented all of the git functionality as these more comp
         |__org rename: rename the origin ID 
         |__org list: list the origin ID
 
+# Guide folder
 
-NOTE: the "guide" folder contains animated .gif images to familiarize you with the script
+The "guide" folder contains animated .gif images to familiarize you with the script:
+
+- example_create_project(remote): https://drive.google.com/drive/folders/17VQNJd0HgN6NMM9R9n8pBXFNJVWRFuen?usp=sharing
 
 # Pull Requests
 
@@ -240,10 +236,6 @@ Pull requests are welcome! If you send a pull request, please:
 - Match the existing coding & commit conventions.
 - Include helpful comments to keep the barrier-to-entry low for people new to the project.
 - Write tests that cover your code as much as possible.
-
-# Collaborator
-    
-    > n/a
 
 # Version
     
