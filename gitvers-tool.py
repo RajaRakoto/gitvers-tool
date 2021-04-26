@@ -1367,7 +1367,7 @@ def gitCommit():
  #commit core
  print(style.BOLD+"Enter the name of the file(s) to track"+style.END)
  branchShow()
- temp = raw_input(style.GREEN + style.BOLD +"\n[🅲🅾🅼🅼🅸🆃 > " + style.END) 
+ temp = raw_input(style.GREEN + style.BOLD +"\n[🅰🅳🅳 > " + style.END) 
  os.system("cd ~/Project/{0} && git add {1}".format(zen,temp))
  print(style.GREEN+"exec git add {0} ... [done]".format(zen)+style.END)
  time.sleep(0.35)
