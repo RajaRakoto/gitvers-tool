@@ -36,40 +36,33 @@
 𝕥𝕙𝕖 𝕘𝕚𝕥𝕧𝕖𝕣𝕤-𝕥𝕠𝕠𝕝 𝕡𝕣𝕠𝕛𝕖𝕔𝕥
 v1.1
 =======================================================================================
-# Demo
-![ Alt text](guide/example_create_project(remote).gif) / ! [](guide/example_create_project(remote).gif)
-
-=======================================================================================
-# Author
-Raja
-
 # Description
 
 A versioning tool using git in script version, allows you to quickly execute repetitive task commands in a single command. For newbies, I strongly suggest first of all to consult this document [https://git-scm.com/book/en/v2] in order to understand why we use git, what interest, and why the version control of a source code.
 
 # Dependencies
     
-    > git (required)
-    > python2 (required)
-    > tree (optional)
-    > man (optional)
-    > openssh-server & openssh-client (recommended)
-    > Node.JS [>= 10.18.0] & NPM [>= 6.13.4] to use UNGIT (recommended for better visibility of your git project)
-    > tilix (if necessary you must access your default shell, a question of efficiency)
+- git (required)
+- python2 (required)
+- tree (optional)
+- man (optional)
+- openssh-server & openssh-client (recommended)
+- Node.JS [>= 10.18.0] & NPM [>= 6.13.4] to use UNGIT (recommended for better visibility of your git project)
+- tilix (if necessary you must access your default shell, a question of efficiency)
 
 # Extensions
     
-    > UNGIT: a web interface that aims to control a git repository, the latter brings usability to git without sacrificing versatility. [https://github.com/FredrikNoren/ungit]
-    > GIT FLOW: git-flow is a set of git extensions that allow high-level repository operations to apply Vincent Driessen's branching model. [https://github.com/nvie/gitflow]
+- UNGIT: a web interface that aims to control a git repository, the latter brings usability to git without sacrificing versatility. [https://github.com/FredrikNoren/ungit]
+- GIT FLOW: git-flow is a set of git extensions that allow high-level repository operations to apply Vincent Driessen's branching model. [https://github.com/nvie/gitflow]
 
 # About git flow
 
 gitflow is not yet integrated (for the time being) in gitvers-tool, but you can use it outside of this script by running the following statement:
 
-    - run the script: $python2 gitvers-tool.py
-    - [input> flow
-    - [flow> 2
-    - you will see a web page on git flow and its usage
+    1. run the script: $python2 gitvers-tool.py
+    2. [input> flow
+    3. [flow> 2
+    4. you will see a web page on git flow and its usage
 
 # Usage (gitvers-tool)
 
@@ -229,8 +222,11 @@ Of course, I haven't implemented all of the git functionality as these more comp
         |__org rename: rename the origin ID 
         |__org list: list the origin ID
 
+# Guide folder
 
-NOTE: the "guide" folder contains animated .gif images to familiarize you with the script
+The "guide" folder contains animated .gif images to familiarize you with the script:
+
+- gitvers-tool(guide): https://drive.google.com/drive/folders/17VQNJd0HgN6NMM9R9n8pBXFNJVWRFuen?usp=sharing
 
 # Pull Requests
 
@@ -241,10 +237,6 @@ Pull requests are welcome! If you send a pull request, please:
 - Include helpful comments to keep the barrier-to-entry low for people new to the project.
 - Write tests that cover your code as much as possible.
 
-# Collaborator
-    
-    > n/a
-
 # Version
     
     > v1.0 beta
@@ -252,11 +244,11 @@ Pull requests are welcome! If you send a pull request, please:
 
 # Report
 
-    you can send me a report, errors (bug, documentation, etc ...) and/or a suggestion to improve this script at these links:
-        |
-        |>> email: raja.rakoto7@gmail.com
-        |>> facebook: https://www.facebook.com/raja.rakotonirina
-        |>> linkedin: https://www.linkedin.com/in/raja-rakotonirina-20a0b116b
+you can send me a report, errors (bug, documentation, etc ...) and/or a suggestion to improve this script at these links:
+        
+- email: raja.rakoto7@gmail.com
+- facebook: https://www.facebook.com/raja.rakotonirina
+- linkedin: https://www.linkedin.com/in/raja-rakotonirina-20a0b116b
 
 
 You are welcome if you want to collaborate to improve this script. Thank you a lot ! :-)
