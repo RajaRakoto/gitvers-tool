@@ -3030,23 +3030,23 @@ while (True):
       #create file 'remote.log' in /tmp
       if temp == '0': #github-https
         serverLog = open(r"/tmp/remote.log","a +")
-        serverLog.write("[project="+zen+"][github-https]-> "+remote+"\n")
+        serverLog.write("[https]-> "+remote+"\n")
         serverLog.close()
         os.system("cat /tmp/remote.log > ~/Project/remote.log")
       if temp == '1': #github-ssh
         serverLog = open(r"/tmp/remote.log","a +")
-        serverLog.write("[project="+zen+"][github-ssh]-> "+remote+"\n")
+        serverLog.write("[ssh]-> "+remote+"\n")
         serverLog.close()
         os.system("cat /tmp/remote.log > ~/Project/remote.log")
       #import 'remote.log' to ~/Project
       if temp == '2': #bitbucket-https
         serverLog = open(r"/tmp/remote.log","a +")
-        serverLog.write("[project="+zen+"][bitbucket-https]-> "+remote+"\n")
+        serverLog.write("[https]-> "+remote+"\n")
         serverLog.close()
         os.system("cat /tmp/remote.log > ~/Project/remote.log")
       if temp == '3': #bitbucket-ssh
         serverLog = open(r"/tmp/remote.log","a +")
-        serverLog.write("[project="+zen+"][bitbucket-ssh]-> "+remote+"\n")
+        serverLog.write("[ssh]-> "+remote+"\n")
         serverLog.close()
         os.system("cat /tmp/remote.log > ~/Project/remote.log")
         
