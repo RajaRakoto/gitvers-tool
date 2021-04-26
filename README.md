@@ -244,11 +244,11 @@ Pull requests are welcome! If you send a pull request, please:
 
 # Report
 
-    you can send me a report, errors (bug, documentation, etc ...) and/or a suggestion to improve this script at these links:
-        |
-        |>> email: raja.rakoto7@gmail.com
-        |>> facebook: https://www.facebook.com/raja.rakotonirina
-        |>> linkedin: https://www.linkedin.com/in/raja-rakotonirina-20a0b116b
+you can send me a report, errors (bug, documentation, etc ...) and/or a suggestion to improve this script at these links:
+        
+- email: raja.rakoto7@gmail.com
+- facebook: https://www.facebook.com/raja.rakotonirina
+- linkedin: https://www.linkedin.com/in/raja-rakotonirina-20a0b116b
 
 
 You are welcome if you want to collaborate to improve this script. Thank you a lot ! :-)
