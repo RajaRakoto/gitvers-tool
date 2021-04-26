@@ -229,6 +229,8 @@ The "guide" folder contains animated .gif images to familiarize you with the scr
 
 - gitvers-tool(guide): https://drive.google.com/drive/folders/17VQNJd0HgN6NMM9R9n8pBXFNJVWRFuen?usp=sharing
 
+NOTE: I will add guide files (when there is something to show you), otherwise you can ask me directly.
+
 # Pull Requests
 
 Pull requests are welcome! If you send a pull request, please:
