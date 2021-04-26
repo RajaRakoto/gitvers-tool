@@ -40,13 +40,11 @@ v1.1
 
 A versioning tool using git in script version, allows you to quickly execute repetitive task commands in a single command. For newbies, I strongly suggest first of all to consult this document [https://git-scm.com/book/en/v2] in order to understand why we use git, what interest, and why the version control of a source code.
 
-# Dependencies
+# Requirements
     
-- git (required)
-- python2 (required)
-- tree (optional)
-- man (optional)
-- openssh-server & openssh-client (recommended)
+- git 
+- python2 
+- openssh-server & openssh-client (optional to use SSH service)
 - Node.JS [>= 10.18.0] & NPM [>= 6.13.4] to use UNGIT (recommended for better visibility of your git project)
 - tilix (if necessary you must access your default shell, a question of efficiency)
 
