@@ -2549,8 +2549,6 @@ def menu():
        print("ᖇ∈ⲙ𝖮𝜏∈")
      if mainPut == 'localmod' or mainPut == 'LOCALMOD':
        print("L𝖮⊂ᎯL ⲙᗝᖙ∈𝘭")
-   
-     report()
      print(style.RED+"________________________________________________________________________"+style.END)     
 
   #### inPut ####
