@@ -3002,7 +3002,7 @@ while (True):
 
       #sever list
       print(style.BOLD+"[SERVER LIST (used)]--------------------------------------------------------"+style.END)
-      os.system("touch ~/Project/remote.log && cat ~/Project/remote.log")
+      os.system("touch ~/Project/.remote.log && cat ~/Project/.remote.log")
       print("\nNOTE: Enter 'clear' in the [SERVER> prompt to clean up the entire server list")
       print(style.BOLD+"----------------------------------------------------------------------------"+style.END)
       remote = raw_input(style.GREEN+"[🆂🅴🆁🆅🅴🆁 > "+style.END)
@@ -3010,12 +3010,12 @@ while (True):
       #clear server list
       if remote == 'clear' or remote == 'CLEAR':
         print(" \n ")
-        os.system("cd /tmp && rm -rf remote.log")
-        os.system("cd ~/Project && rm -rf remote.log")
+        os.system("cd /tmp && rm -rf .remote.log")
+        os.system("cd ~/Project && rm -rf .remote.log")
         print(style.GREEN+"all server list cleared ... [done]"+style.END)
         #show server list again (verification)
         print(style.BOLD+"[SERVER LIST (used)]--------------------------------------------------------"+style.END)
-        os.system("touch ~/Project/remote.log && cat ~/Project/remote.log")
+        os.system("touch ~/Project/.remote.log && cat ~/Project/.remote.log")
         print("\nNOTE: Enter 'clear' in the [SERVER> prompt to clean up the entire server list")
         print(style.BOLD+"----------------------------------------------------------------------------"+style.END)
         remote = raw_input(style.GREEN+"[🆂🅴🆁🆅🅴🆁 > "+style.END)
@@ -3025,30 +3025,30 @@ while (True):
       time.sleep(1)
 
       #server log //test*
-      #create file 'remote.log' in /tmp
+      #create file '.remote.log' in /tmp
       if temp == '0': #github-https
-        serverLog = open(r"/tmp/remote.log","a +")
+        serverLog = open(r"/tmp/.remote.log","a +")
         serverLog.write("[https]-> "+remote+"\n")
         serverLog.close()
-        os.system("cat /tmp/remote.log > ~/Project/remote.log")
+        os.system("cat /tmp/.remote.log > ~/Project/.remote.log")
       if temp == '1': #github-ssh
-        serverLog = open(r"/tmp/remote.log","a +")
+        serverLog = open(r"/tmp/.remote.log","a +")
         serverLog.write("[ssh]-> "+remote+"\n")
         serverLog.close()
-        os.system("cat /tmp/remote.log > ~/Project/remote.log")
-      #import 'remote.log' to ~/Project
+        os.system("cat /tmp/.remote.log > ~/Project/.remote.log")
+      #import '.remote.log' to ~/Project
       if temp == '2': #bitbucket-https
-        serverLog = open(r"/tmp/remote.log","a +")
+        serverLog = open(r"/tmp/.remote.log","a +")
         serverLog.write("[https]-> "+remote+"\n")
         serverLog.close()
-        os.system("cat /tmp/remote.log > ~/Project/remote.log")
+        os.system("cat /tmp/.remote.log > ~/Project/.remote.log")
       if temp == '3': #bitbucket-ssh
-        serverLog = open(r"/tmp/remote.log","a +")
+        serverLog = open(r"/tmp/.remote.log","a +")
         serverLog.write("[ssh]-> "+remote+"\n")
         serverLog.close()
-        os.system("cat /tmp/remote.log > ~/Project/remote.log")
+        os.system("cat /tmp/.remote.log > ~/Project/.remote.log")
         
-      print(style.GREEN+"Server update to remote.log ... [done]"+style.END)
+      print(style.GREEN+"Server update to .remote.log ... [done]"+style.END)
       time.sleep(1)
       #checking ID
       print(style.GREEN+"Checking origin ID ... [done]"+style.END)
