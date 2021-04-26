@@ -42,27 +42,27 @@ A versioning tool using git in script version, allows you to quickly execute rep
 
 # Dependencies
     
-    > git (required)
-    > python2 (required)
-    > tree (optional)
-    > man (optional)
-    > openssh-server & openssh-client (recommended)
-    > Node.JS [>= 10.18.0] & NPM [>= 6.13.4] to use UNGIT (recommended for better visibility of your git project)
-    > tilix (if necessary you must access your default shell, a question of efficiency)
+- git (required)
+- python2 (required)
+- tree (optional)
+- man (optional)
+- openssh-server & openssh-client (recommended)
+- Node.JS [>= 10.18.0] & NPM [>= 6.13.4] to use UNGIT (recommended for better visibility of your git project)
+- tilix (if necessary you must access your default shell, a question of efficiency)
 
 # Extensions
     
-    > UNGIT: a web interface that aims to control a git repository, the latter brings usability to git without sacrificing versatility. [https://github.com/FredrikNoren/ungit]
-    > GIT FLOW: git-flow is a set of git extensions that allow high-level repository operations to apply Vincent Driessen's branching model. [https://github.com/nvie/gitflow]
+- UNGIT: a web interface that aims to control a git repository, the latter brings usability to git without sacrificing versatility. [https://github.com/FredrikNoren/ungit]
+- GIT FLOW: git-flow is a set of git extensions that allow high-level repository operations to apply Vincent Driessen's branching model. [https://github.com/nvie/gitflow]
 
 # About git flow
 
 gitflow is not yet integrated (for the time being) in gitvers-tool, but you can use it outside of this script by running the following statement:
 
-    - run the script: $python2 gitvers-tool.py
-    - [input> flow
-    - [flow> 2
-    - you will see a web page on git flow and its usage
+    1. run the script: $python2 gitvers-tool.py
+    2. [input> flow
+    3. [flow> 2
+    4. you will see a web page on git flow and its usage
 
 # Usage (gitvers-tool)
 
