@@ -46,7 +46,7 @@ A versioning tool using git in script version, allows you to quickly execute rep
 - python2 
 - openssh-server & openssh-client (optional to use SSH service)
 - Node.JS [>= 10.18.0] & NPM [>= 6.13.4] to use UNGIT (recommended for better visibility of your git project)
-- tilix (if necessary you must access your default shell, a question of efficiency)
+- tilix (if necessary you must access your default shell or if you want to run another instance of the gitvers-tool script, a question of efficiency)
 
 # Extensions
     
