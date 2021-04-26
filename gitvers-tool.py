@@ -1165,15 +1165,23 @@ def backup():
   time.sleep(0.02)
   print("\n")
   print(style.GREEN+"All project/server backup ... [Loading]"+style.END)
-  time.sleep(3)
+  time.sleep(2)
   print("\n")
+  #delete if old backup exist
+  print(style.GREEN+"Deletion old backup (if exist) ... [Loading]"+style.END)
+  time.sleep(1)
+  os.system("cd ~/Project/ && rm -rf ALL-PROJECT-SERVER-BACKUP.tar.gz")
+  #compress all project
+  print(style.GREEN+"Compression all project ... [Loading]"+style.END)
+  time.sleep(1)
   os.system("cd ~/Project/ && tar cvfz ALL-PROJECT-SERVER-BACKUP.tar.gz *")
   print("\n")
-  time.sleep(3)
+  time.sleep(2)
   print(style.GREEN+"All project/server backup ... [done]"+style.END)
   time.sleep(1)
   print("\n")
   print(style.BOLD+"Now put 'ALL-PROJECT-SERVER-BACKUP.tar.gz' in a safe and secure location ..."+style.END)
+  print("[Tips]: Create your own order (alias) to be able to backup faster - https://alvinalexander.com/blog/post/linux-unix/create-aliases/")
 
   done()
   choiceMain()
@@ -1520,6 +1528,14 @@ def branchlist():
   done()
   choiceMenu()  
 
+#branchlist0 //OK
+def branchlist0():
+  print(" \n ")
+  print(style.GREEN+"[all-branch-list]~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"+style.END)
+  os.system("cd ~/Project/{0} && git branch -a".format(zen))
+  print(style.GREEN+"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"+style.END)
+  done()
+
 #gitbranch (menu) //OK
 def gitbranch():
  print("\n**************")
@@ -1850,7 +1866,7 @@ def originMenu():
   done()
   choiceMenu()
 
-#push //OK
+#push (manual) //OK
 def push():
 
   #push note
@@ -1881,6 +1897,55 @@ def push():
     done()
     choiceMenu()
 
+#pushquickly //test
+def pushQ():
+
+    #verification
+    temp = raw_input(style.BOLD+ "\nBefore executing the quick push, make sure that the branch exists locally, [ENTER] to continue ... " + style.END) 
+    branchlist0()
+
+    #pushQ menu
+    print("\n    ------------- quick 🅿🆄🆂🅷 ------------")
+    print("  /                                       \\")              
+    print(style.BOLD+"             0 | to master"+style.END);
+    print(style.BOLD+"             1 | to dev"+style.END);
+    print(style.BOLD+"             2 | to release"+style.END);
+    print(style.BOLD+"             3 | specify branch"+style.END);
+    print("  \                                       /")  
+    print("    -------------------------------------")
+    print("[Origin ID] = {0}".format(origin))
+
+    pushQ = raw_input(style.GREEN + style.BOLD+ "\n[🅿🆄🆂🅷(quick) > " + style.END) 
+    
+    if pushQ == '0': #to master
+      os.system("cd ~/Project/{0} && git push {1} master".format(zen,origin))
+      print(style.GREEN+"Origin ID = {0}".format(origin)+style.END)
+      print(style.GREEN+"push to master ... [done]"+style.END)
+      time.sleep(0.5)
+
+    if pushQ == '1': #to dev
+      os.system("cd ~/Project/{0} && git push {1} dev".format(zen,origin))
+      print(style.GREEN+"Origin ID = {0}".format(origin)+style.END)
+      print(style.GREEN+"push to dev ... [done]"+style.END)
+      time.sleep(0.5)
+
+    if pushQ == '2': #to release
+      os.system("cd ~/Project/{0} && git push {1} release".format(zen,origin))
+      print(style.GREEN+"Origin ID = {0}".format(origin)+style.END)
+      print(style.GREEN+"push to release ... [done]"+style.END)
+      time.sleep(0.5)
+
+    if pushQ == '3': #specify branch
+      print(style.BOLD+"\nManually enter the branch name ... "+style.END)
+      branch = raw_input(style.GREEN + style.BOLD+ "[🅱🆁🅰🅽🅲🅷 > " + style.END) 
+      os.system("cd ~/Project/{0} && git push {1} {2}".format(zen,origin,branch))
+      print(style.GREEN+"Origin ID = {0}".format(origin)+style.END)
+      print(style.GREEN+"push to {0} ... [done]".format(branch)+style.END)
+      time.sleep(0.5)
+
+    done()
+    choiceMenu()
+    
 #pull //OK
 def pull():
 
@@ -2496,7 +2561,7 @@ def menu():
     #workflows
      print("            |"+style.DARKCYAN+"①③"+ style.END + " - git branch (remote - menu) |"+style.YELLOW+"   r+l+[br]/rm_rbr"+style.END+"      |")
      print("            |"+style.DARKCYAN+"①④"+ style.END + " - origin (menu)              |"+style.YELLOW+"  [org]+_(rename/list)" +style. END+"  |")
-     print(style.PURPLE+" 🅦🅞🅡🅚🅕🅛🅞🅦🅢"+style.END+"  |"+style.DARKCYAN+"①⑤"+ style.END + " - git push (send request)    |"+style.YELLOW+"         push          "  +style.END+" |")
+     print(style.PURPLE+" 🅦🅞🅡🅚🅕🅛🅞🅦🅢"+style.END+"  |"+style.DARKCYAN+"①⑤"+ style.END + " - git push (send request)    |"+style.YELLOW+"      push/pushq       "  +style.END+" |")
      print("            |"+style.DARKCYAN+"①⑥"+ style.END + " - git pull (receive request) |"+style.YELLOW+"         pull          "+style.END+" |")
      print("            |"+style.DARKCYAN+"①⑦"+ style.END + " - fast forward (update repo) |"+style.YELLOW+"        update          "+style.END+"|")
      print("---------------------------------------------------------------------<          ") 
@@ -2696,6 +2761,9 @@ def menu():
 #===============pull & push
      if inPut == '15' or inPut == 'push' or inPut == 'PUSH':
        push()
+
+     if inPut == 'pushq' or inPut == 'PUSHQ':
+       pushQ()
 
      if inPut == '16' or inPut == 'pull' or inPut == 'PULL':
        pull()
@@ -3002,7 +3070,7 @@ while (True):
 
       #sever list
       print(style.BOLD+"[SERVER LIST (used)]--------------------------------------------------------"+style.END)
-      os.system("touch ~/Project/remote.log && cat ~/Project/remote.log")
+      os.system("touch ~/Project/.remote.log && cat ~/Project/.remote.log")
       print("\nNOTE: Enter 'clear' in the [SERVER> prompt to clean up the entire server list")
       print(style.BOLD+"----------------------------------------------------------------------------"+style.END)
       remote = raw_input(style.GREEN+"[🆂🅴🆁🆅🅴🆁 > "+style.END)
@@ -3010,12 +3078,12 @@ while (True):
       #clear server list
       if remote == 'clear' or remote == 'CLEAR':
         print(" \n ")
-        os.system("cd /tmp && rm -rf remote.log")
-        os.system("cd ~/Project && rm -rf remote.log")
+        os.system("cd /tmp && rm -rf .remote.log")
+        os.system("cd ~/Project && rm -rf .remote.log")
         print(style.GREEN+"all server list cleared ... [done]"+style.END)
         #show server list again (verification)
         print(style.BOLD+"[SERVER LIST (used)]--------------------------------------------------------"+style.END)
-        os.system("touch ~/Project/remote.log && cat ~/Project/remote.log")
+        os.system("touch ~/Project/.remote.log && cat ~/Project/.remote.log")
         print("\nNOTE: Enter 'clear' in the [SERVER> prompt to clean up the entire server list")
         print(style.BOLD+"----------------------------------------------------------------------------"+style.END)
         remote = raw_input(style.GREEN+"[🆂🅴🆁🆅🅴🆁 > "+style.END)
@@ -3025,30 +3093,30 @@ while (True):
       time.sleep(1)
 
       #server log //test*
-      #create file 'remote.log' in /tmp
+      #create file '.remote.log' in /tmp
       if temp == '0': #github-https
-        serverLog = open(r"/tmp/remote.log","a +")
+        serverLog = open(r"/tmp/.remote.log","a +")
         serverLog.write("[https]-> "+remote+"\n")
         serverLog.close()
-        os.system("cat /tmp/remote.log > ~/Project/remote.log")
+        os.system("cat /tmp/.remote.log > ~/Project/.remote.log")
       if temp == '1': #github-ssh
-        serverLog = open(r"/tmp/remote.log","a +")
+        serverLog = open(r"/tmp/.remote.log","a +")
         serverLog.write("[ssh]-> "+remote+"\n")
         serverLog.close()
-        os.system("cat /tmp/remote.log > ~/Project/remote.log")
-      #import 'remote.log' to ~/Project
+        os.system("cat /tmp/.remote.log > ~/Project/.remote.log")
+      #import '.remote.log' to ~/Project
       if temp == '2': #bitbucket-https
-        serverLog = open(r"/tmp/remote.log","a +")
+        serverLog = open(r"/tmp/.remote.log","a +")
         serverLog.write("[https]-> "+remote+"\n")
         serverLog.close()
-        os.system("cat /tmp/remote.log > ~/Project/remote.log")
+        os.system("cat /tmp/.remote.log > ~/Project/.remote.log")
       if temp == '3': #bitbucket-ssh
-        serverLog = open(r"/tmp/remote.log","a +")
+        serverLog = open(r"/tmp/.remote.log","a +")
         serverLog.write("[ssh]-> "+remote+"\n")
         serverLog.close()
-        os.system("cat /tmp/remote.log > ~/Project/remote.log")
+        os.system("cat /tmp/.remote.log > ~/Project/.remote.log")
         
-      print(style.GREEN+"Server update to remote.log ... [done]"+style.END)
+      print(style.GREEN+"Server update to .remote.log ... [done]"+style.END)
       time.sleep(1)
       #checking ID
       print(style.GREEN+"Checking origin ID ... [done]"+style.END)
