@@ -226,7 +226,7 @@ Of course, I haven't implemented all of the git functionality as these more comp
 
 The "guide" folder contains animated .gif images to familiarize you with the script:
 
-- example_create_project(remote): https://drive.google.com/drive/folders/17VQNJd0HgN6NMM9R9n8pBXFNJVWRFuen?usp=sharing
+- gitvers-tool(guide): https://drive.google.com/drive/folders/17VQNJd0HgN6NMM9R9n8pBXFNJVWRFuen?usp=sharing
 
 # Pull Requests
 
