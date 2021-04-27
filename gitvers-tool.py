@@ -791,8 +791,17 @@ def tree():
   print(style.BOLD + "\n[file hided]" + style.END)
   os.system("ls -a ~/Project/{0}".format(zen))
   print("========================================")
+  print(" \n ")
+  serverList()
 
   choiceMenu()
+
+#serverList //OK
+def serverList():
+  print(style.BOLD+"[SERVER LIST (used)]--------------------------------------------------------"+style.END)
+  os.system("touch ~/Project/.remote.log && cat ~/Project/.remote.log")
+  print("\nNOTE: Enter 'clear' in the [SERVER> prompt to clean up the entire server list")
+  print(style.BOLD+"----------------------------------------------------------------------------"+style.END)
 
 #touch //OK
 def touch():
@@ -2270,7 +2279,7 @@ def GenProjLocal():
    print(style.GREEN+"Generate .gitignore ... [done]"+style.END)
    time.sleep(1)
 
-   os.system("cd ~/Project/{0} && mkdir tmp && echo 'tmp' > .gitignore && echo 'tmp/*' >> .gitignore && echo 'log_ssh-keygen' >> .gitignore && echo '.remote.log' >> .gitignore".format(newProjectName))
+   os.system("cd ~/Project/{0} && mkdir tmp && echo 'tmp' > .gitignore && echo 'tmp/*' >> .gitignore && echo '.gitignore' >> .gitignore".format(newProjectName))
    print(style.GREEN+"Generate tmp folder ... [done]"+style.END)
    time.sleep(1)
 
@@ -2325,7 +2334,7 @@ def remotePREconfig():
       print(style.GREEN+"Generate .gitignore ... [done]"+style.END)
       time.sleep(1)
   
-      os.system("cd ~/Project/{0} && mkdir tmp && echo 'tmp' > .gitignore && echo 'tmp/*' >> .gitignore && echo '.remote.log' >> .gitignore".format(newProjectName))
+      os.system("cd ~/Project/{0} && mkdir tmp && echo 'tmp' > .gitignore && echo 'tmp/*' >> .gitignore && echo '.gitignore' >> .gitignore".format(newProjectName))
       print(style.GREEN+"Generate tmp folder ... [done]"+style.END)
       time.sleep(1)
   
@@ -2480,7 +2489,7 @@ def localmodel():
    print(style.GREEN+"Generate .gitignore ... [done]"+style.END)
    time.sleep(0.01)
 
-   os.system("cd ~/Project/{0} && mkdir tmp && echo 'tmp' > .gitignore && echo 'tmp/*' >> .gitignore && echo '.remote.log' >> .gitignore".format(localmodel))
+   os.system("cd ~/Project/{0} && mkdir tmp && echo 'tmp' > .gitignore && echo 'tmp/*' >> .gitignore && echo '.gitignore' >> .gitignore ".format(localmodel))
    print(style.GREEN+"Generate tmp folder ... [done]"+style.END)
    time.sleep(0.01)
 
@@ -2568,7 +2577,7 @@ def menu():
      print("---------------------------------------------------------------------<          ") 
      
     #other
-     print(style.PURPLE+"   🅞🅣🅗🅔🅡 "+style.END+"   |"+style.DARKCYAN+" a"+ style.END + " - check project (menu)       |"+style.YELLOW+"      s/ls/tree      " +style. END+"   |")
+     print(style.PURPLE+"   🅞🅣🅗🅔🅡 "+style.END+"   |"+style.DARKCYAN+" a"+ style.END + " - check project/server(used) |"+style.YELLOW+"   s/ls/tree/server  " +style. END+"   |")
      print("            |"+style.DARKCYAN+" b"+ style.END + " - shell                      |"+style.YELLOW+"          sh           " +style. END+" |")
      print(style.BOLD+"---------------------------------------------------------------------- "+style.END)
     #  print("---------------------------------------------------------------------<          ") 
@@ -2788,7 +2797,7 @@ def menu():
      if inPut == 'status' or inPut == 'STATUS' or inPut == 's' or inPut == 'S':
        gitstatus()
 
-     if inPut == "tree" or inPut == 'TREE' or inPut == 'ls' or inPut == 'LS' or inPut == "list" or inPut == 'LIST':
+     if inPut == "tree" or inPut == 'TREE' or inPut == 'ls' or inPut == 'LS' or inPut == "list" or inPut == 'LIST' or inPut == 'server' or inPut == 'SERVER':
        tree()
 #===============readme
      if inPut == 'readme' or inPut == 'README':
@@ -2853,6 +2862,7 @@ while (True):
    print("||"+style.RED+"______➍    |del & delall "+style.END+"- delete one/more project(s) [local]")
    print("||"+style.RED+"______➎    |purge "+style.END+"- purge a project and clear all traces from git [log/history]")
    print("||"+style.RED+"______➏    |backup "+style.END+"- create a backup of the whole project/server [local]")
+   print("||"+style.RED+"______➐    |server "+style.END+"- see the lists of servers used [remote]")
    print("||"+"  \                                                                                /")  
    print("||"+"    ------------------------------------------------------------------------------")
 #===============main2
@@ -3000,6 +3010,13 @@ while (True):
  #6
    if mainPut == '6' or mainPut == 'backup' or mainPut == 'BACKUP':
       backup()
+#===============main10.2
+ #7
+   if mainPut == '7' or mainPut == 'server' or mainPut == 'SERVER':
+      print(" \n ")
+      serverList()  
+      done()
+      choiceMain()
 #===============main11
  #ssh
    if mainPut == 'ssh' or mainPut == 'SSH':
@@ -3069,24 +3086,29 @@ while (True):
       print(style.BOLD+"* https-server:"+style.END+" https://github.com/RajaRakoto/gitvers-tool.git")
       print(" \n ")
 
+      #create ./gitvers-tool/tmp folder (if not exist)
+      os.system("mkdir tmp")
+      print(style.GREEN+"generate tmp in gitvers-tool folder ... [done]"+style.END)
+      time.sleep(1)
+      #re-exec & re-config .gitignore (specialy for gitvers-tool)
+      #ignore .gitignore xD
+      os.system("echo 'tmp' > .gitignore && echo 'tmp/*' >> .gitignore && echo '.gitignore' >> .gitignore")
+      print(style.GREEN+"re-exec & re-config .gitignore ... [done]"+style.END)
+      print(" \n ")
+      time.sleep(1)
+      
       #sever list
-      print(style.BOLD+"[SERVER LIST (used)]--------------------------------------------------------"+style.END)
-      os.system("touch ~/Project/.remote.log && cat ~/Project/.remote.log")
-      print("\nNOTE: Enter 'clear' in the [SERVER> prompt to clean up the entire server list")
-      print(style.BOLD+"----------------------------------------------------------------------------"+style.END)
+      serverList()
       remote = raw_input(style.GREEN+"[🆂🅴🆁🆅🅴🆁 > "+style.END)
 
       #clear server list
       if remote == 'clear' or remote == 'CLEAR':
         print(" \n ")
-        os.system("cd /tmp && rm -rf .remote.log")
-        os.system("cd ~/Project && rm -rf .remote.log")
+        os.system("cd tmp && rm -rf remote_tmp.log && touch remote_tmp.log")
+        os.system("cd ~/Project && rm -rf .remote.log && touch .remote.log")
         print(style.GREEN+"all server list cleared ... [done]"+style.END)
         #show server list again (verification)
-        print(style.BOLD+"[SERVER LIST (used)]--------------------------------------------------------"+style.END)
-        os.system("touch ~/Project/.remote.log && cat ~/Project/.remote.log")
-        print("\nNOTE: Enter 'clear' in the [SERVER> prompt to clean up the entire server list")
-        print(style.BOLD+"----------------------------------------------------------------------------"+style.END)
+        serverList()
         remote = raw_input(style.GREEN+"[🆂🅴🆁🆅🅴🆁 > "+style.END)
 
       print(" \n ")
@@ -3094,28 +3116,29 @@ while (True):
       time.sleep(1)
 
       #server log //OK
-      #create file '.remote.log' on current directory (./gitvers-too: .remote.kog is ignored from git (added in .gitignore))
+      #create file 'remote_tmp.log' on current directory (./gitvers-tool/tmp: remote_tmp.log is ignored from git (added in .gitignore))
+      #remote_tmp.log: a temporary of .remote.log file (stocked in gitvers-tool/tmp folder)
       if temp == '0': #github-https
-        serverLog = open(r".remote.log","a +")
+        serverLog = open(r"./tmp/remote_tmp.log","a +")
         serverLog.write("[https]-> "+remote+"\n")
         serverLog.close()
-        os.system("cat .remote.log > ~/Project/.remote.log")
+        os.system("cat ./tmp/remote_tmp.log > ~/Project/.remote.log")
       if temp == '1': #github-ssh
-        serverLog = open(r".remote.log","a +")
+        serverLog = open(r"./tmp/remote_tmp.log","a +")
         serverLog.write("[ssh]-> "+remote+"\n")
         serverLog.close()
-        os.system("cat .remote.log > ~/Project/.remote.log")
+        os.system("cat ./tmp/remote_tmp.log > ~/Project/.remote.log")
       #import '.remote.log' to ~/Project
       if temp == '2': #bitbucket-https
-        serverLog = open(r".remote.log","a +")
+        serverLog = open(r"./tmp/remote_tmp.log","a +")
         serverLog.write("[https]-> "+remote+"\n")
         serverLog.close()
-        os.system("cat .remote.log > ~/Project/.remote.log")
+        os.system("cat ./tmp/remote_tmp.log > ~/Project/.remote.log")
       if temp == '3': #bitbucket-ssh
-        serverLog = open(r".remote.log","a +")
+        serverLog = open(r"./tmp/remote_tmp.log","a +")
         serverLog.write("[ssh]-> "+remote+"\n")
         serverLog.close()
-        os.system("cat .remote.log > ~/Project/.remote.log")
+        os.system("cat ./tmp/remote_tmp.log > ~/Project/.remote.log")
         
       print(style.GREEN+"Server update to .remote.log ... [done]"+style.END)
       time.sleep(1)
