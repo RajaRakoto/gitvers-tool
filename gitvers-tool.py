@@ -2270,7 +2270,7 @@ def GenProjLocal():
    print(style.GREEN+"Generate .gitignore ... [done]"+style.END)
    time.sleep(1)
 
-   os.system("cd ~/Project/{0} && mkdir tmp && echo 'tmp' > .gitignore && echo 'tmp/*' >> .gitignore && echo 'log_ssh-keygen' >> .gitignore".format(newProjectName))
+   os.system("cd ~/Project/{0} && mkdir tmp && echo 'tmp' > .gitignore && echo 'tmp/*' >> .gitignore && echo 'log_ssh-keygen' >> .gitignore && echo '.remote.log' >> .gitignore".format(newProjectName))
    print(style.GREEN+"Generate tmp folder ... [done]"+style.END)
    time.sleep(1)
 
@@ -2325,7 +2325,7 @@ def remotePREconfig():
       print(style.GREEN+"Generate .gitignore ... [done]"+style.END)
       time.sleep(1)
   
-      os.system("cd ~/Project/{0} && mkdir tmp && echo 'tmp' > .gitignore && echo 'tmp/*' >> .gitignore".format(newProjectName))
+      os.system("cd ~/Project/{0} && mkdir tmp && echo 'tmp' > .gitignore && echo 'tmp/*' >> .gitignore && echo '.remote.log' >> .gitignore".format(newProjectName))
       print(style.GREEN+"Generate tmp folder ... [done]"+style.END)
       time.sleep(1)
   
@@ -2480,7 +2480,7 @@ def localmodel():
    print(style.GREEN+"Generate .gitignore ... [done]"+style.END)
    time.sleep(0.01)
 
-   os.system("cd ~/Project/{0} && mkdir tmp && echo 'tmp' > .gitignore && echo 'tmp/*' >> .gitignore".format(localmodel))
+   os.system("cd ~/Project/{0} && mkdir tmp && echo 'tmp' > .gitignore && echo 'tmp/*' >> .gitignore && echo '.remote.log' >> .gitignore".format(localmodel))
    print(style.GREEN+"Generate tmp folder ... [done]"+style.END)
    time.sleep(0.01)
 
@@ -3093,29 +3093,29 @@ while (True):
       print(style.GREEN+"origin ID = {0}".format(origin)+style.END)
       time.sleep(1)
 
-      #server log //test*
-      #create file '.remote.log' in /tmp
+      #server log //OK
+      #create file '.remote.log' on current directory (./gitvers-too: .remote.kog is ignored from git (added in .gitignore))
       if temp == '0': #github-https
-        serverLog = open(r"/tmp/.remote.log","a +")
+        serverLog = open(r".remote.log","a +")
         serverLog.write("[https]-> "+remote+"\n")
         serverLog.close()
-        os.system("cat /tmp/.remote.log > ~/Project/.remote.log")
+        os.system("cat .remote.log > ~/Project/.remote.log")
       if temp == '1': #github-ssh
-        serverLog = open(r"/tmp/.remote.log","a +")
+        serverLog = open(r".remote.log","a +")
         serverLog.write("[ssh]-> "+remote+"\n")
         serverLog.close()
-        os.system("cat /tmp/.remote.log > ~/Project/.remote.log")
+        os.system("cat .remote.log > ~/Project/.remote.log")
       #import '.remote.log' to ~/Project
       if temp == '2': #bitbucket-https
-        serverLog = open(r"/tmp/.remote.log","a +")
+        serverLog = open(r".remote.log","a +")
         serverLog.write("[https]-> "+remote+"\n")
         serverLog.close()
-        os.system("cat /tmp/.remote.log > ~/Project/.remote.log")
+        os.system("cat .remote.log > ~/Project/.remote.log")
       if temp == '3': #bitbucket-ssh
-        serverLog = open(r"/tmp/.remote.log","a +")
+        serverLog = open(r".remote.log","a +")
         serverLog.write("[ssh]-> "+remote+"\n")
         serverLog.close()
-        os.system("cat /tmp/.remote.log > ~/Project/.remote.log")
+        os.system("cat .remote.log > ~/Project/.remote.log")
         
       print(style.GREEN+"Server update to .remote.log ... [done]"+style.END)
       time.sleep(1)
