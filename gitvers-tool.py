@@ -1663,24 +1663,16 @@ def gitbranchRemoteRemove():
   
   print(" \n ")
   temp = raw_input(style.PURPLE+"Press [ENTER] to display the lists of available branches ... "+style.END)
-  os.system("cd ~/Project/{0} && git branch".format(zen))
+  os.system("cd ~/Project/{0} && git branch -a".format(zen))
 
   print(" \n ")
 
-  print(style.BOLD+"Please enter the name of the remote branch to be deleted "+style.END+"(Warning! this also removes the local branch) : \n")
+  print(style.BOLD+"Please enter the name of the remote branch to be deleted")
   rmrbr = raw_input(style.RED+style.BOLD+"[🅳🅴🅻🅴🆃🅴 > " + style.END) 
   
   print(" \n ")
 
-  #STEP1: suppression of la branche local
-  print(style.GREEN+"Deletion of the current local branch ... "+style.END)
-  os.system("cd ~/Project/{0} && git branch -d {1}".format(zen,rmrbr))
-  print(style.GREEN+"Delete local branch '{0}' ... [done]".format(rmrbr))
-  time.sleep(0.35)
-
-  print(" \n ")
-
-  #STEP2: suppression of la branche distant
+  #delete remote branch
   print(style.GREEN+"Deletion of the current remote branch ... "+style.END)
   os.system("cd ~/Project/{0} && git push {1} --delete {2}".format(zen,origin,rmrbr))
   print(style.GREEN+"Delete remote branch '{0}' ... [done]".format(rmrbr))
@@ -1688,8 +1680,7 @@ def gitbranchRemoteRemove():
   
   print(" \n ")
   temp = raw_input(style.PURPLE+"Press [ENTER] to verify the change ... "+style.END)
-  os.system("cd ~/Project/{0} && git branch".format(zen))
-  os.system("cd ~/Project/{0} && git branch -r")
+  os.system("cd ~/Project/{0} && git branch -a".format(zen))
   print(style.GREEN+"Verification ... [done]".format(rmrbr))
   time.sleep(0.35)
 
