@@ -499,11 +499,21 @@ def installflow():
 def helpflow():
   print(" \n ")
   print(style.GREEN+"git flow help ... [loading]"+style.END)
-  os.system("cd gitflow.info/ && gnome-www-browser index.html")
-  print(style.GREEN+"git flow help ... [done]"+style.END)
+  time.sleep(0.5)
+  #decompress gitflow.info.tar.gz
+  os.system("cd docs && tar xvf gitflow.info.tar.gz")
+  print(style.GREEN+"gitflow.info decompressing ... [done]"+style.END)
   time.sleep(0.35)
+  #read index.html in default browser
+  print(style.GREEN+"reading index.html of gitflow.info ... [loading]"+style.END)
+  time.sleep(1)
+  os.system("cd docs/ && gnome-www-browser gitflow.info/index.html")
   print(" \n ")
   temp = raw_input(style.DARKCYAN+"Press [ENTER] to return to the menu of GITflow ...")
+  #free up memory
+  os.system("cd docs && rm -rf gitflow.info")
+  print(style.GREEN+"clean cache gitflow.info ... [done]"+style.END)
+  time.sleep(0.35)
   flow()
 
 #flow //test*
