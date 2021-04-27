@@ -507,7 +507,7 @@ def helpflow():
   #read index.html in default browser
   print(style.GREEN+"reading index.html of gitflow.info ... [loading]"+style.END)
   time.sleep(1)
-  os.system("cd docs/ && gnome-www-browser index.html")
+  os.system("cd docs/ && gnome-www-browser gitflow.info/index.html")
   print(" \n ")
   temp = raw_input(style.DARKCYAN+"Press [ENTER] to return to the menu of GITflow ...")
   #free up memory
