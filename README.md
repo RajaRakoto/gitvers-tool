@@ -210,8 +210,8 @@ Pull requests are welcome! If you send a pull request, please:
 
 # Version
     
-    > v1.0 beta
-    > v1.1 (currently)
+    # v1.0 beta
+    # v1.1 (currently)
 
 # Report
 
