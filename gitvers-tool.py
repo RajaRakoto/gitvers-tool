@@ -3062,6 +3062,7 @@ while (True):
       print(style.BOLD+"           1 | github(ssh)"+style.END);
       print(style.BOLD+"           2 | bitbucket(https)"+style.END);
       print(style.BOLD+"           3 | bitbucket(ssh)"+style.END);
+      print(style.BOLD+"           4 | local(ssh)"+style.END);
       print("  \                                    /")  
       print("    ----------------------------------\n")
       temp = raw_input(style.GREEN + style.BOLD + "[🅾🆁🅸🅶🅸🅽 > " + style.END)
@@ -3076,6 +3077,9 @@ while (True):
         print(style.GREEN+"origin => {0}".format(origin)+style.END)
       if temp == '3':
         origin = 'bitbucket-ssh'
+        print(style.GREEN+"origin => {0}".format(origin)+style.END)
+      if temp == '4':
+        origin = 'local-ssh'
         print(style.GREEN+"origin => {0}".format(origin)+style.END)
         print(" \n ")
 
@@ -3135,6 +3139,11 @@ while (True):
         serverLog.close()
         os.system("cat ./tmp/remote_tmp.log > ~/Project/.remote.log")
       if temp == '3': #bitbucket-ssh
+        serverLog = open(r"./tmp/remote_tmp.log","a +")
+        serverLog.write("[ssh]-> "+remote+"\n")
+        serverLog.close()
+        os.system("cat ./tmp/remote_tmp.log > ~/Project/.remote.log")
+      if temp == '4': #local-ssh
         serverLog = open(r"./tmp/remote_tmp.log","a +")
         serverLog.write("[ssh]-> "+remote+"\n")
         serverLog.close()
