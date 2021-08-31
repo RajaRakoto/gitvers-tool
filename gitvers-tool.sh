@@ -454,7 +454,7 @@ ${cya}--------------------------------------------------------------------------
       while [ ! $pull = "q" ]; do
         echo -e "${gry}\n'q' pour sortir de pull ...${end}"
         echo -e "${Bgre}"
-        read -p "[PUSH> " pull 
+        read -p "[PULL> " pull 
         echo -e "${end}"
         if [ $pull = "q" ]; then
           break
