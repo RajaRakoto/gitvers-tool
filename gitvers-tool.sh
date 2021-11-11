@@ -541,6 +541,51 @@ ${cya}--------------------------------------------------------------------------
     allDone
   }
 
+  function validation(){
+    echo -e "\n >>> VALIDATION <<<"
+    sleep 0.5
+
+    #create README file
+    echo ""
+    cd ~/Project/$work && echo '~ README ~' > README.md
+    echo -e "${gre} Generate README.md ... [done]${end}"
+    sleep 0.35
+
+    #first pull
+    echo ""
+    cd ~/Project/$work && git pull $origin master
+    echo -e "${gre}pull verification ... [done]${end}"
+    sleep 0.35
+
+    #status & add & commit & push (master)
+    echo ""
+    cd ~/Project/$work && git status 
+    echo -e "${gre}check status 1 ... [done]${end}"
+    sleep 0.35
+
+    echo ""
+    cd ~/Project/$work && git add *
+    echo -e "${gre}add ... [done]${end}"
+    sleep 0.35
+
+    echo ""
+    cd ~/Project/$work && git status 
+    echo -e "${gre}check status 2 ... [done]${end}"
+    sleep 0.35
+
+    echo ""
+    cd ~/Project/$work && git commit -m 'validation'
+    echo -e "${gre}1st commit ... [done]${end}"
+    sleep 0.35
+
+    echo ""
+    cd ~/Project/$work && git push $origin master
+    echo -e "${gre}VALIDATION ... [done]${end}"
+    sleep 0.35
+
+    allDone
+  }
+
 ###MAIN
 
   #blobal variable
@@ -598,6 +643,8 @@ ${cya}--------------------------------------------------------------------------
     echo -e "${mag}<origin>${end}"
     echo -e "${blu}lorg.${end} list origin ${Igry}[lister l'ID origin du depot en cours]${end}"
     echo -e "${blu}norg.${end} rename origin ${Igry}[renommer l'ID origin du depot en cours]${end}"
+    echo -e "${mag}<validation>${end}"
+    echo -e "${blu}valid.${end} valid new project ${Igry}[valider un projet nouvellement creE]${end}"
     echo -e "${red}------------[OTHERS]-------------${end}"
     #sleep 0.5
     echo -e "${blu}77.${end} purge"
@@ -779,6 +826,9 @@ ${cya}--------------------------------------------------------------------------
 
       "norg") #OK
         originRename;;
+      
+      "valid") #OK
+        validation;;
 
       77) #OK
         purge;;
