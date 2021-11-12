@@ -678,7 +678,7 @@ ${cya}--------------------------------------------------------------------------
 
         #re-exec & re-config .gitignore (specialy for gitvers-tool)
         #ignore .gitignore
-        echo 'tmp' > .gitignore && echo 'tmp/*' >> .gitignore && echo 'gitignore' >> .gitignore
+        echo 'tmp' > .gitignore && echo 'tmp/*' >> .gitignore && echo '.gitignore' >> .gitignore
         echo -e "${gre}re-exec & re-config .gitignore ... [done] ${end}"
         sleep 1
 
