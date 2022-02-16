@@ -396,6 +396,20 @@ ${cya}--------------------------------------------------------------------------
     allDone
   }
 
+  function delOriginServer(){
+    #list remote branch
+    cd ~/Project/$work && git remote  
+    echo -e "\nEntrer le nom du serveur a supprimer"
+    #core
+    echo -e "${Bgre}"
+    read -p "[DEL> " server
+    echo -e "${end}"
+    cd ~/Project/$work && git remote remove $server 
+    echo -e "${gre}Server '$server' deleted ... [done]${end}"
+    sleep 0.35
+    allDone
+  }
+
   function switch(){
     git branch
     echo -e "Entrer le nom de la branche a changer"
@@ -465,33 +479,43 @@ ${cya}--------------------------------------------------------------------------
     allDone
   }
 
-  function update(){
-    read -p "Etes vous sur de vouloir mettre a jour le depot, appuyez sur [ENTRER] pour continuer ..." tmp 
+  function upstream(){
+    read -p "Etes vous sur de vouloir mettre a jour votre depot local/fork ?, appuyez sur [ENTRER] pour continuer ..." tmp 
 
     #core
-    echo "Entrer le URL du depot original ..."
+    echo -e "/nEntrer le URL(SSH) du depot original ..."
     echo -e "${Bgre}"
-    read -p "[URL> " url 
+    read -p "[URL(SSH)> " url 
     echo -e "${end}"
+	
+    #verification remote branch
+    cd ~/Project/$work && git remote -v
+    echo -e "${gre}verify remote branch ... [done]${end}"
+    sleep 0.35    
 
-    cd ~/Project/$work && git remote add upstream
+    #add upstream original url
+    cd ~/Project/$work && git remote add upstream $url
     echo -e "${gre}upstream added ... [done]${end}"
     sleep 0.35
 
+    #verify upstream branch
     cd ~/Project/$work && git remote -v
-    echo -e "${gre}verify upstream ... [done]${end}"
+    echo -e "${gre}verify upstream branch ... [done]${end}"
     sleep 0.35
-
+ 
+    #fetch upstream
     cd ~/Project/$work && git fetch upstream
     echo -e "${gre}fetch upstream ... [done]${end}"
     sleep 0.35s
     
-    cd ~/Project/$work && git branch -a 
-    echo -e "${gre}verify remote branch upstream ... [done]${end}"
+    #merge changes from upstream/master
+    cd ~/Project/$work && git merge upstream/master
+    echo -e "${gre}merge upstream/master ... [done]${end}"
     sleep 0.35s
-
-    cd ~/Project/$work && git merge upstream/master 
-    echo -e "${gre}auto update all informations on branch master ... [done]${end}"
+	
+    #push changes to update your fork master on server 
+    cd ~/Project/$work && git push $origin master
+    echo -e "${gre}push changes to update your fork master on server ... [done]${end}"
     sleep 0.35s
 
     echo ""
@@ -639,10 +663,11 @@ ${cya}--------------------------------------------------------------------------
     echo -e "${mag}<remote>${end}"
     echo -e "${blu}push.${end} send data ${Igry}[envoyer vos donnees vers le serveur]${end}"
     echo -e "${blu}pull.${end} receive data ${Igry}[recevoir des donnees depuis le serveur]${end}"
-    echo -e "${blu}upt.${end} fast forward ${Igry}[mettre a jour rapidement le depot]${end}"
-    echo -e "${mag}<origin>${end}"
+    echo -e "${blu}update.${end} fast forward ${Igry}[mettre a jour rapidement le depot]${end}"
+    echo -e "${mag}<origin/server>${end}"
     echo -e "${blu}lorg.${end} list origin ${Igry}[lister l'ID origin du depot en cours]${end}"
     echo -e "${blu}norg.${end} rename origin ${Igry}[renommer l'ID origin du depot en cours]${end}"
+    echo -e "${blu}dorg.${end} delete origin/server ${Igry}[supprimer un serveur]${end}"
     echo -e "${mag}<validation>${end}"
     echo -e "${blu}valid.${end} valid new project ${Igry}[valider un projet nouvellement creE]${end}"
     echo -e "${red}------------[OTHERS]-------------${end}"
@@ -818,14 +843,17 @@ ${cya}--------------------------------------------------------------------------
       "pull") #test *
         pull;;
 
-      "upt") #test
-        update;;
+      "update") #test *
+        upstream;;
 
       "lorg") #OK
         originList;;
 
       "norg") #OK
         originRename;;
+
+      "dorg") #OK
+        delOriginServer;;
       
       "valid") #OK
         validation;;
