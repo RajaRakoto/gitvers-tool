@@ -483,7 +483,8 @@ ${cya}--------------------------------------------------------------------------
     read -p "Etes vous sur de vouloir mettre a jour votre depot local/fork ?, appuyez sur [ENTRER] pour continuer ..." tmp 
 
     #core
-    echo -e "/nEntrer le URL(SSH) du depot original ..."
+    echo ""
+    echo "Entrer le URL(SSH) du depot original ..."
     echo -e "${Bgre}"
     read -p "[URL(SSH)> " url 
     echo -e "${end}"
