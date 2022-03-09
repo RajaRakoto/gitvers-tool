@@ -75,3 +75,5 @@ function upstream() {
   echo ""
   echo -e "${gre}\nSUCCESSFUL !${end}"
 }
+
+upstream
