@@ -33,7 +33,7 @@ function upstream() {
 
   #core
   echo ""
-  echo "Entrer le URL(SSH) du depot original que vous avez forkE ... (Ex: git@github.com:RajaRakoto/gitvers-tool.git)"
+  echo "Entrer le URL(SSH) du depot original ... (Ex: git@github.com:RajaRakoto/gitvers-tool.git)"
   echo ""
   echo -e "[original-repository]---------------[log]"
   tail -n 5 .log-original-repo
@@ -44,7 +44,7 @@ function upstream() {
   echo "=> $origin" >>.log-original-repo
   echo ""
   user=`whoami`
-  echo "Entrer le URL(SSH) du depot original que vous avez forkE ... (Ex: git@github.com:$user/gitvers-tool.git)"
+  echo "Entrer le URL(SSH) du depot fork ... (Ex: git@github.com:$user/gitvers-tool.git)"
   echo ""
   echo -e "[fork-repository]-------------------[log]"
   tail -n 5 .log-fork-repo
