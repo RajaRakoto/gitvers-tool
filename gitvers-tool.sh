@@ -91,7 +91,7 @@ function config() {
   allDone
 }
 
-# TODO: test
+
 function preConf() {
 
   #local config
@@ -251,7 +251,7 @@ function branchShow() {
   echo -e "${mag}Your current branch is =>${end} $branch"
 }
 
-# TODO: test
+
 function commit() {
   #commit model
   echo -e "${cya}[COMMIT model]"
@@ -390,7 +390,6 @@ function mainBranchInput() {
   echo -e "${end}"
 }
 
-# TODO: test | fix
 function push() {
   #push syntax
   echo -e "${cya}[PUSH syntax]"
@@ -410,7 +409,7 @@ function push() {
   allDone
 }
 
-# TODO: test | fix
+ | fix
 function pull() {
   #pull syntax
   echo -e "${cya}[PULL syntax]"
@@ -430,7 +429,7 @@ function pull() {
   allDone
 }
 
-# TODO: test
+
 function upstream() {
   #create log files
   touch ~/Projects/$work/tmp/.originalRepo.log
@@ -529,7 +528,7 @@ function serverIdRename() {
   allDone
 }
 
-# TODO: test
+
 function validation() {
   echo -e "${Bcya}\n >>> VALIDATION <<<${end}"
   sleep 0.5
