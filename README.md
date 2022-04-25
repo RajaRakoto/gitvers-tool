@@ -54,6 +54,8 @@
 </tr>
 </table>
 
+<br><br>
+
 # `📌 INTRODUCTION`
 
 #### `⚫ About gitvers-tool`
@@ -112,7 +114,7 @@ chmod +x gitvers-tool.sh
 
 Here is a snippet of using gitvers-tool, you can also do other things like `pull`, `fast forward`, `merge branches`, `clone projects`, and many more. Don't hesitate to contact me if you have any questions.
 
-<img src="https://github.com/RajaRakoto/github-docs/blob/master/gitvers-tool/gitvers-demo.gif?raw=true" width="700">
+<img src="https://github.com/RajaRakoto/github-docs/blob/master/gitvers-tool/gitvers-demo.gif?raw=true" width="1000">
 
 <br>
 <hr>
