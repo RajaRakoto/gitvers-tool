@@ -136,11 +136,12 @@ $ sudo -H npm install -g ungit
 
 - **Tuto**: If you want a full tutorial from UNGIT (in FR) -> https://grafikart.fr/tutoriels/ungit-437
 
-<img src="./img/ungit-illustration.png" width="700">
+<img src="https://github.com/RajaRakoto/github-docs/blob/master/gitvers-tool/ungit-illustration.png?raw=true
+" width=700>
 
 <br>
 
-💠 Performing a commit, the advantage with ungit is that you can more easily select the file to commit <br> <img src="./img/ungit-commit.png" width="500"> <br>💠 To display the modification made to a file <br> <img src="./img/ungit-diff.png" width="500"> <br>💠 To change branches and merge one branch to another <br> <img src="./synopsis/ungit-merge.gif" width="500"> <br>💠 To deploy a modification on the remote server (push) <br> <img src="./synopsis/ungit-push.gif" width="500"> <br>💠 To quickly edit the .gitignore file <br> <img src="./img/ungit-ignore.png" width="500">
+💠 Performing a commit, the advantage with ungit is that you can more easily select the file to commit <br> <img src="https://github.com/RajaRakoto/github-docs/blob/master/gitvers-tool/ungit-commit.png?raw=true" width="500"> <br>💠 To display the modification made to a file <br> <img src="https://github.com/RajaRakoto/github-docs/blob/master/gitvers-tool/ungit-diff.png?raw=true" width="500"> <br>💠 To change branches and merge one branch to another <br> <img src="https://github.com/RajaRakoto/github-docs/blob/master/gitvers-tool/ungit-merge.gif?raw=true" width="500"> <br>💠 To deploy a modification on the remote server (push) <br> <img src="https://github.com/RajaRakoto/github-docs/blob/master/gitvers-tool/ungit-push.gif?raw=true" width="500"> <br>💠 To quickly edit the .gitignore file <br> <img src="https://github.com/RajaRakoto/github-docs/blob/master/gitvers-tool/ungit-ignore.png?raw=true" width="500">
 
  <br>
 
