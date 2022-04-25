@@ -91,7 +91,6 @@ function config() {
   allDone
 }
 
-
 function preConf() {
 
   #local config
@@ -113,11 +112,6 @@ function preConf() {
   #tmp
   cd ~/Projects/$projectName && mkdir -p tmp
   echo -e "${gre}Generate tmp folder ... [done] ${end}"
-  sleep 0.2
-
-  #log files
-  cd ~/Projects/$projectName && touch tmp/.originalRepo.log tmp/.forkedRepo.log
-  echo -e "${gre}Generate log files ... [done] ${end}"
   sleep 0.2
 }
 
@@ -251,17 +245,16 @@ function branchShow() {
   echo -e "${mag}Your current branch is =>${end} $branch"
 }
 
-
 function commit() {
   #commit model
   echo -e "${cya}[COMMIT model]"
-  echo -e "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~\n${end}"
+  echo -e "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n${end}"
   echo -e "[add]: message => ${Igry}add file(s)${end}"
   echo -e "[del]: message => ${Igry}delete file(s)${end}"
   echo -e "[fix]: message => ${Igry}bug fix${end}"
   echo -e "[feat]:message => ${Igry}adding feature${end}"
   echo -e "[docs]: message => ${Igry}documentation update${end}"
-  echo -e "${cya}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~\n${end}"
+  echo -e "${cya}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n${end}"
 
   status0
 
@@ -409,7 +402,6 @@ function push() {
   allDone
 }
 
- | fix
 function pull() {
   #pull syntax
   echo -e "${cya}[PULL syntax]"
@@ -429,47 +421,44 @@ function pull() {
   allDone
 }
 
-
 function upstream() {
-  #create log files
-  touch ~/Projects/$work/tmp/.originalRepo.log
-  touch ~/Projects/$work/tmp/.forkedRepo.log
-  echo -e "${gre}Generate originalRepo.log & forkedRepo.log ... [done]${end}"
-
   echo ""
-  echo "Enter URL(SSH) of original repository ... (Ex: git@github.com:RajaRakoto/gitvers-tool.git)"
+  echo -e "Enter URL (SSH) of original repository ... \nExample: git@github.com:RajaRakoto/gitvers-tool.git"
   echo ""
-  echo -e "[original-repository]---------------[log]"
-  tail -n 5 ~/Projects/$work/tmp/.originalRepo.log
-  echo -e "-----------------------------------------"
+  echo -e "${bold}\n[SERVER LIST (used)]--------------------------------------${end}"
+  tail -n 5 ~/Projects/.originalRepo.log
+  echo -e "\n${bold}----------------------------------------------------------${end}"
   echo -e "${Bgre}"
-  read -p "[URL(SSH)> " origin
+  read -p "[URL> " originalRepo
   echo -e "${end}"
-  echo "=> $origin" >>~/Projects/$work/tmp/.originalRepo.log
+  echo "[original repo]-> $originalRepo" >>~/Projects/.originalRepo.log
   echo ""
   user=$(whoami)
-  echo "Enter fork repository URL(SSH) ... (Ex: git@github.com:$user/gitvers-tool.git)"
+  echo -e "Enter fork repository URL (SSH) ... \nExample: git@github.com:$user/gitvers-tool.git"
   echo ""
-  echo -e "[fork-repository]-------------------[log]"
-  tail -n 5 ~/Projects/$work/tmp/.forkedRepo.log
-  echo -e "-----------------------------------------"
+  echo -e "${bold}\n[SERVER LIST (used)]--------------------------------------${end}"
+  tail -n 5 ~/Projects/.forkedRepo.log
+  echo -e "\n${bold}----------------------------------------------------------${end}"
   echo -e "${Bgre}"
-  read -p "[URL(SSH)> " fork
+  read -p "[URL> " forkedRepo
   echo -e "${end}"
-  echo "=> $fork" >>~/Projects/$work/tmp/.forkedRepo.log
+  echo "[forked repo]-> $forkedRepo" >>~/Projects/.forkedRepo.log
+
+  function verify() {
+    cd ~/Projects/$work && git remote -v
+  }
 
   #verification remote branch
-  cd ~/Projects/$work && git remote -v
+  verify
   echo -e "${gre}Verify remote branch ... [done]${end}"
   sleep 0.35
 
   #add upstream original url
-  cd ~/Projects/$work && git remote add upstream $origin
-  echo -e "${gre}Upstream added ... [done]${end}"
+  cd ~/Projects/$work && git remote add upstream $originalRepo
   sleep 0.35
 
   #verify upstream branch
-  cd ~/Projects/$work && git remote -v
+  verify
   echo -e "${gre}Verify upstream branch ... [done]${end}"
   sleep 0.35
 
@@ -478,14 +467,17 @@ function upstream() {
   echo -e "${gre}Fetch upstream ... [done]${end}"
   sleep 0.35s
 
-  #merge changes from upstream/master
-  cd ~/Projects/$work && git merge upstream/master
-  echo -e "${gre}Merge upstream/master ... [done]${end}"
+  #set main branch
+  mainBranchInput
+
+  #merge changes from upstream/<mainBranch>
+  cd ~/Projects/$work && git merge upstream/$mainBranch
+  echo -e "${gre}Merge upstream/$mainBranch ... [done]${end}"
   sleep 0.35s
 
-  #push changes to update your fork master on server
-  cd ~/Projects/$work && git push $fork master
-  echo -e "${gre}Push changes to update your fork master on server ... [done]${end}"
+  #push changes to update your fork main branch on server
+  cd ~/Projects/$work && git push $forkedRepo $mainBranch
+  echo -e "${gre}Push changes to update your fork $mainBranch on server ... [done]${end}"
   sleep 0.35s
 
   allDone
@@ -528,7 +520,6 @@ function serverIdRename() {
   allDone
 }
 
-
 function validation() {
   echo -e "${Bcya}\n >>> VALIDATION <<<${end}"
   sleep 0.5
@@ -570,12 +561,13 @@ work="n/a"
 server="127.0.0.1"
 branch="n/a"
 
-#create working directory
+#create working files
 mkdir -p ~/Projects
+cd ~/Projects && touch .server.log .originalRepo.log .forkedRepo.log
 
 while [ true ]; do
   echo -e "\n"
-  echo -e "${Bred}                    GITVERS-TOOL${end}"
+  echo -e "${Bred}                     GITVERS-TOOL${end}"
   sleep 1
   echo "========================================================="
   echo -e "${yel}Version: 2.0.0"
@@ -602,31 +594,31 @@ while [ true ]; do
   echo -e "${blu}${red}-------------[GIT]---------------${end}"
   #sleep 0.5
   echo -e "${mag}<BASICS>${end}"
-  echo -e "${blu}c.${end} Git commit ${Igry}[commit your changes]${end}"
-  echo -e "${blu}l.${end} Git log ${Igry}[view your project history]${end}"
-  echo -e "${blu}s.${end} Git status ${Igry}[see your project status]${end}"
-  echo -e "${blu}merge.${end} Git merge ${Igry}[merge to main branch]${end}"
-  echo -e "${blu}diff.${end} Git diff ${Igry}[difference between 2 file states]${end}"
+  echo -e "${blu}c.${end} Git commit ${gry}[commit your changes]${end}"
+  echo -e "${blu}l.${end} Git log ${gry}[view your project history]${end}"
+  echo -e "${blu}s.${end} Git status ${gry}[see your project status]${end}"
+  echo -e "${blu}merge.${end} Git merge ${gry}[merge to main branch]${end}"
+  echo -e "${blu}diff.${end} Git diff ${gry}[difference between 2 file states]${end}"
   echo -e "${mag}<BRANCH>${end}"
-  echo -e "${blu}cbr.${end} Create branch ${Igry}[create new branch]${end}"
-  echo -e "${blu}dbr.${end} Delete local branch ${Igry}[delete local branch]${end}"
-  echo -e "${blu}drbr.${end} Delete remote branch ${Igry}[delete remote branch]${end}"
-  echo -e "${blu}sbr.${end} Switch branch ${Igry}[move to another branch]${end}"
-  echo -e "${blu}lbr.${end} List branch ${Igry}[list all existing branches]${end}"
+  echo -e "${blu}cbr.${end} Create branch ${gry}[create new branch]${end}"
+  echo -e "${blu}dbr.${end} Delete local branch ${gry}[delete local branch]${end}"
+  echo -e "${blu}drbr.${end} Delete remote branch ${gry}[delete remote branch]${end}"
+  echo -e "${blu}sbr.${end} Switch branch ${gry}[move to another branch]${end}"
+  echo -e "${blu}lbr.${end} List branch ${gry}[list all existing branches]${end}"
   echo -e "${mag}<REMOTE>${end}"
-  echo -e "${blu}push.${end} Send data ${Igry}[send your data to remote repository]${end}"
-  echo -e "${blu}pull.${end} Receive data ${Igry}[receive data from remote repository]${end}"
-  echo -e "${blu}update.${end} Fast forward ${Igry}[update local and remote repository]${end}"
+  echo -e "${blu}push.${end} Send data ${gry}[send your data to remote repository]${end}"
+  echo -e "${blu}pull.${end} Receive data ${gry}[receive data from remote repository]${end}"
+  echo -e "${blu}update.${end} Fast forward ${gry}[update local and remote repository]${end}"
   echo -e "${mag}<SERVER>${end}"
-  echo -e "${blu}lserv.${end} List server-id ${Igry}[list server id of current repository]${end}"
-  echo -e "${blu}nserv.${end} Rename server-id ${Igry}[rename server id of current repository]${end}"
-  echo -e "${blu}dserv.${end} Delete server-id ${Igry}[delete server id of current repository]${end}"
+  echo -e "${blu}lserv.${end} List server-id ${gry}[list server id of current repository]${end}"
+  echo -e "${blu}nserv.${end} Rename server-id ${gry}[rename server id of current repository]${end}"
+  echo -e "${blu}dserv.${end} Delete server-id ${gry}[delete server id of current repository]${end}"
   echo -e "${mag}<VALIDATION>${end}"
-  echo -e "${blu}valid.${end} Valid new git project ${Igry}[validate newly created git project]${end}"
+  echo -e "${blu}valid.${end} Valid new git project ${gry}[validate newly created git project]${end}"
   echo -e "${red}------------[OTHERS]-------------${end}"
   #sleep 0.5
-  echo -e "${blu}purge.${end} Purge ${Igry}[delete git project cleanly]${end}"
-  echo -e "${blu}bck.${end} Backup ${Igry}[create a backup of your git projects]${end}"
+  echo -e "${blu}purge.${end} Purge ${gry}[delete git project cleanly]${end}"
+  echo -e "${blu}bck.${end} Backup ${gry}[create a backup of your git projects]${end}"
   echo -e "${blu}exit.${end} EXIT"
   echo "========================================================="
   if [ $work = "n/a" ]; then
@@ -658,7 +650,7 @@ while [ true ]; do
     serverList
 
     function serverInput() {
-      echo -e "\nEnter git repository link (SSH)..."
+      echo -e "\nEnter git repository URL (SSH)..."
       echo "Example: git@github.com:RajaRakoto/gitvers-tool.git"
       echo -e "${Bgre}"
       read -p "[REPO> " server
