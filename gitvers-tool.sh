@@ -113,12 +113,12 @@ function preConf() {
   #tmp
   cd ~/Projects/$projectName && mkdir -p tmp
   echo -e "${gre}Generate tmp folder ... [done] ${end}"
-   sleep 0.2
+  sleep 0.2
 
   #log files
   cd ~/Projects/$projectName && touch tmp/.originalRepo.log tmp/.forkedRepo.log
   echo -e "${gre}Generate log files ... [done] ${end}"
-   sleep 0.2
+  sleep 0.2
 }
 
 function create() {
@@ -126,7 +126,7 @@ function create() {
   #project generator + config
   echo -e "${Bcya} \n>>> GIT PROJECT GENERATOR <<<\n ${end}"
   sleep 0.3
-	
+
   echo -e "${cya}Generate project '$projectName' directory ... [done] ${end}"
 
   #preconf
@@ -396,17 +396,16 @@ function push() {
   echo -e "${cya}[PUSH syntax]"
   echo -e "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~${end}"
   echo -e "<server-id> <branch> =>${Igry} send data to the server named <server-id> \nof branch <branch> of the repository attached to <server>${end}"
- echo -e "${cya}current server:${end} $server" 
-echo -e "${cya}current server-id:${end} $origin"
- echo -e "${cya}current branch:${end} $branch"
+  echo -e "${cya}current server:${end} $server"
+  echo -e "${cya}current server-id:${end} $origin"
+  echo -e "${cya}current branch:${end} $branch"
   echo -e "${cya}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n${end}"
 
+  echo -e "${Bgre}"
+  read -p "[PUSH> " push
+  echo -e "${end}"
 
-    echo -e "${Bgre}"
-    read -p "[PUSH> " push
-    echo -e "${end}"
-
-    cd ~/Projects/$work && git push $push
+  cd ~/Projects/$work && git push $push
 
   allDone
 }
@@ -417,17 +416,16 @@ function pull() {
   echo -e "${cya}[PULL syntax]"
   echo -e "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~${end}"
   echo -e "<server-id> <branch> =>${Igry} receive data from <branch> remote branch \nof the repository attached to <server>${end}"
- echo -e "${cya}current server:${end} $server" 
-echo -e "${cya}current server-id:${end} $origin"
- echo -e "${cya}current branch:${end} $branch"
+  echo -e "${cya}current server:${end} $server"
+  echo -e "${cya}current server-id:${end} $origin"
+  echo -e "${cya}current branch:${end} $branch"
   echo -e "${cya}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n${end}"
 
+  echo -e "${Bgre}"
+  read -p "[PULL> " pull
+  echo -e "${end}"
 
-    echo -e "${Bgre}"
-    read -p "[PULL> " pull
-    echo -e "${end}"
-
-    cd ~/Projects/$work && git pull $pull
+  cd ~/Projects/$work && git pull $pull
 
   allDone
 }
@@ -499,7 +497,7 @@ function serverIdList() {
   cd ~/Projects/$work && git remote -v
   echo -e "${bold}---------------------------------------------------------- ${end}"
 
-allDone
+  allDone
 }
 
 function serverIdList0() {
@@ -541,11 +539,11 @@ function validation() {
   #first pull
   echo ""
   cd ~/Projects/$work && git pull $origin $mainBranch
-	
+
   #create README.md
   cd ~/Projects/$work && touch README.md
 
-  #status & add & commit & push 
+  #status & add & commit & push
   echo ""
   cd ~/Projects/$work && git add *
 
@@ -652,13 +650,13 @@ while [ true ]; do
     echo -e "${end}"
 
     function serverList() {
-  echo -e "${bold}\n[SERVER LIST (used)]--------------------------------------${end}"
-  tail -n 5 ~/Projects/.server.log
-  echo -e "${Igry}\nNOTE: Enter 'clear' to clear the saved server list ${end}"
-  echo -e "${bold}----------------------------------------------------------${end}"
-}
-	
-	serverList
+      echo -e "${bold}\n[SERVER LIST (used)]--------------------------------------${end}"
+      tail -n 5 ~/Projects/.server.log
+      echo -e "${Igry}\nNOTE: Enter 'clear' to clear the saved server list ${end}"
+      echo -e "${bold}----------------------------------------------------------${end}"
+    }
+
+    serverList
 
     function serverInput() {
       echo -e "\nEnter git repository link (SSH)..."
