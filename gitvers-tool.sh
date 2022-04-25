@@ -28,14 +28,14 @@ function allDone() {
 }
 
 function gitConfigShow() {
-  echo -e "${cya}[config-status-global]"
+  echo -e "\n${cya}[config-status-global]"
   echo -e "---------------------------------------------------------------- ${end}"
   git config --list
   echo -e "${cya}---------------------------------------------------------------- ${end}"
 }
 
 function listProj() {
-  echo -e "${gre}Project list: ${end}"
+  echo -e "${gre}Projects list: ${end}"
   echo -e "${cya}$(ls ~/Projects)${end}"
 }
 
@@ -56,7 +56,7 @@ function config() {
   echo -e "${end}"
   git config --global user.email $newMail
   echo -e "${gre}E-mail configured ... [done] ${end}"
-  sleeping 0.35
+  sleep 0.35
 
   #name
   echo -e "\nEnter your name"
@@ -65,26 +65,26 @@ function config() {
   echo -e "${end}"
   git config --global user.name $newName
   echo -e "${gre}Name configured ... [done] ${end}"
-  sleeping 0.35
+  sleep 0.35
 
   #branch
-  echo -e "\nEnter master branch (default = master)"
+  echo -e "\nEnter main branch (default = main)"
   echo -e "${Bgre}"
-  read -p "[BRANCH> " branch
+  read -p "[BRANCH> " defaultBranch
   echo -e "${end}"
-  git config --global init.defaultBranch $branch
-  echo -e "${gre}Init branch name is '$branch' now ... [done] ${end}"
-  sleeping 0.35
+  git config --global init.defaultBranch $defaultBranch
+  echo -e "${gre}Initial branch name is '$defaultBranch' now ... [done] ${end}"
+  sleep 0.35
 
   #color syntax
   git config --global color.ui true
   echo -e "\n${gre}Color syntax activated ... [done] ${end}"
-  sleeping 0.35
+  sleep 0.35
 
   #rebase
   git config --global branch.autosetuprebase always
   echo -e "\n${gre}Rebase all pull (request) ... [done] ${end}"
-  sleeping 0.35
+  sleep 0.35
 
   #check config
   gitConfigShow
@@ -93,56 +93,51 @@ function config() {
 
 # TODO: test
 function preConf() {
-  echo -e "${Bcya} \n>>> REMOTE CONFIG <<<\n ${end}"
-  sleep 2
 
   #local config
   cd ~/Projects/$projectName && git init
   echo -e "${gre}Git init ... [done] ${end}"
   echo -e "${gre}Generate .git ... [done] ${end}"
-  sleep 1
+  sleep 0.2
 
   #gitignore
   cd ~/Projects/$projectName && touch .gitignore
   echo -e "${gre}Generate .gitignore ... [done] ${end}"
-  sleep 1
+  sleep 0.2
 
   #config .gitignore
-  echo 'tmp' >~/Projects/$projectName/.gitignore && echo 'node_modules' >>~/Projects/$projectName/.gitignore && echo '.originalRepo.log' >>~/Projects/$projectName/.gitignore && echo '.forkedRepo.log' >>~/Projects/$projectName/.gitignore && echo 'backups' >>~/Projects/$projectName/.gitignore && echo '.gitignore' >>~/Projects/$projectName/.gitignore
-  echo -e "$.gitignore configured ... [done] ${end}"
-  sleep 1
+  echo 'tmp' >~/Projects/$projectName/.gitignore && echo 'backups' >>~/Projects/$projectName/.gitignore && echo 'node_modules' >>~/Projects/$projectName/.gitignore && echo '.gitignore' >>~/Projects/$projectName/.gitignore
+  echo -e "${gre}.gitignore configured ... [done] ${end}"
+  sleep 0.2
 
   #tmp
   cd ~/Projects/$projectName && mkdir -p tmp
   echo -e "${gre}Generate tmp folder ... [done] ${end}"
-  sleep 1
+   sleep 0.2
 
-  #check .gitignore
-  cd ~/Projects/$projectName && cat .gitignore
-  echo -e "${gre}Checking .gitignore ... [done] ${end}"
-  sleep 1
-
-  echo -e "\n"
-  echo -e "${gre}All local config ... [done] ${end}"
-  sleep 2
+  #log files
+  cd ~/Projects/$projectName && touch tmp/.originalRepo.log tmp/.forkedRepo.log
+  echo -e "${gre}Generate log files ... [done] ${end}"
+   sleep 0.2
 }
 
 function create() {
 
   #project generator + config
-  echo -e "${Bcya} \n>>> REMOTE PROJECT GENERATOR <<<\n ${end}"
-  sleeping 2
+  echo -e "${Bcya} \n>>> GIT PROJECT GENERATOR <<<\n ${end}"
+  sleep 0.3
+	
+  echo -e "${cya}Generate project '$projectName' directory ... [done] ${end}"
 
   #preconf
   preConf
-  echo -e "${Igry} you can now enter 'REMOTE' mode to validate what you have created ...${end}"
   allDone
 }
 
 function genssh() {
   echo "Enter your email address, SSH will use the address as a label for the key..."
   echo -e "${Bgre}"
-  read -p "[EMAIL>" tag
+  read -p "[EMAIL> " tag
   echo -e "${end}"
   ssh-keygen -t rsa -b 4096 -C "$tag"
   echo -e "${gre}Generate ssh-key (private|public) ... [done] ${end}"
@@ -166,7 +161,7 @@ function authorized_keys() {
   echo -e "${end}"
   ssh-copy-id $computer
   echo -e "${gre}Authorized_keys ... [done]${end}"
-  sleeping 0.35
+  sleep 0.35
   allDone
 }
 
@@ -178,7 +173,7 @@ function sshConfig() {
   echo ""
   echo -e "
 ${cya}~ PLEASE NOTE and FOLLOW INSTRUCTIONS BELOW~
--------------------------------------------------- -------------------------------------------------- ------------${end}
+----------------------------------------------------------------------------------------------------------------${end}
 1. Ensure that the source/target machine is accessible (ping <ipv4 source/target>)
 2. Check that ssh (openssh-client|openssh-server) is installed on each machine by typing the command 'ssh'
 3. Check in the field below that the 'bck' folder has been created, otherwise manually create a backup of the ssh configuration i-e '/etc/ssh'
@@ -187,7 +182,7 @@ ${cya}~ PLEASE NOTE and FOLLOW INSTRUCTIONS BELOW~
   echo -e "
 4. Uncomment 'Port 22' in 'ssh_config'
 5. Uncomment 'Port 22', 'PubkeyAuthentication yes' and 'PermitRootLogin no' in 'sshd_config'
-${cya}---------------------------------------------- -------------------------------------------------- ------------------------------${end}
+${cya}------------------------------------------------------------------------------------------------------------------------------${end}
 "
   echo ""
   read -p "Press [ENTER] if you are ready to proceed to the configuration step (ssh_config and sshd_config)..." temp
@@ -207,11 +202,11 @@ function purge() {
   read -p "[PROJECT> " purge
   echo -e "${end}"
   echo -e "${red}"
-  read -p "You are deleting project '$purge', press [ENTER] to continue..." temp
+  read -p "Removing '$purge' git project, press [ENTER] to continue..." temp
   echo -e "${end}"
   cd ~/Projects/$purge && git reset --hard && git clean -dffx && cd .. && rm -rf $purge
-  echo "Deleting $purge"
-  sleeping 0.35
+  echo -e "${gre}Removing $purge ... [done]${end}"
+  sleep 0.35
   allDone
 }
 
@@ -219,27 +214,17 @@ function backup() {
   echo -e "${mag}"
   read -p "Press [ENTER] to start backup process, [CTRL+C] to cancel..." temp
   echo -e "${end}"
-  echo -e "${gre}All project/server backup ... [loading] ${end}"
-  sleeping 1
   #delete old backup
-  echo -e "${gre}Delete old backup (if exist) ... [Loading] ${end}"
-  sleeping 1
-  cd ~/Projects/ && rm -rf bac.tar.gz
+  echo -e "${gre}Delete old backups file (if exist) ... [Loading] ${end}"
+  sleep 1
+  cd ~/Projects/ && rm -rf git-projects-backups.tar.gz
   #compression
-  echo -e "${gre}Compression all project ... [Loading] ${end}"
-  sleeping 1
-  cd ~/Projects/ && tar cvfz bac.tar.gz *
-  echo -e "${Bgre}All project/server backup ... [done] ${end}"
-  sleeping 1
+  echo -e "${gre}Compression all git projects ... [Loading] ${end}"
+  sleep 1
+  cd ~/Projects/ && tar cvfz git-projects-backups.tar.gz *
+  echo -e "${Bgre}All git projects backuped ... [done] ${end}"
+  sleep 1
   allDone
-}
-
-# TODO: test
-function serverList() {
-  echo -e "${bold}\n[SERVER LIST (used)]--------------------------------------------------------${end}"
-  touch ~/Projects/$work/.server.log && tail -n 5 ~/Projects/$work/.server.log
-  echo -e "${Igry}\nNOTE: Enter 'clear' to clear the saved server list ${end}"
-  echo -e "${bold}------------------------------------------------------------------------------------------- ${end}"
 }
 
 function status() {
@@ -288,7 +273,7 @@ function commit() {
   read -p "[ADD> " index
   echo -e "${end}"
   cd ~/Projects/$work && git add $index
-  sleeping 0.35
+  sleep 0.35
 
   status0
 
@@ -312,45 +297,59 @@ function diff() {
 }
 
 function merge() {
-  cd ~/Projects/$work && git checkout master
-  echo -e "${gre}Switch to branch master ... [done]${end}"
-  sleeping 0.35
+  mainBranchInput
+  cd ~/Projects/$work && git checkout $mainBranch
+  echo -e "${gre}Switch to branch $mainBranch ... [done]${end}"
+  sleep 0.35
   echo ""
   git branch
-  echo "Enter branch name to merge into master"
+  echo -e "\nEnter branch name to merge into $mainBranch"
   echo -e "${Bgre}"
   read -p "[MERGE> " merge
   echo -e "${end}"
   cd ~/Projects/$work && git merge $merge
-  echo -e "${gre}Merge to branch master ... [done]${end}"
-  sleeping 0.35
+  echo -e "${gre}Merge to branch $mainBranch ... [done]${end}"
+  sleep 0.35
   allDone
 }
 
 function branch() {
-  echo -e "Enter name of the branch to create"
+  echo -e "\nEnter name of the branch to create"
   echo -e "${Bgre}"
   read -p "[BRANCH> " branch
   echo -e "${end}"
   cd ~/Projects/$work && git branch $branch
   echo -e "${gre}Create new branch '$branch' ... [done]${end}"
-  sleeping 0.35
+  sleep 0.35
   allDone
 }
 
 function delBranch() {
   cd ~/Projects/$work && git branch -a
-  echo -e "Enter name of branch to delete"
+  echo -e "\nEnter name of branch to delete"
   echo -e "${Bgre}"
   read -p "[DEL> " branch
   echo -e "${end}"
-  cd ~/Projects/$work && git checkout master && git branch -d $branch
-  echo -e "${gre}Delete branch '$branch' ... [done]${end}"
-  sleeping 0.35
+  mainBranchInput
+  cd ~/Projects/$work && git checkout $mainBranch && git branch -d $branch
+  echo -e "${gre}Removing '$branch' branch ... [done]${end}"
+  sleep 0.35
   allDone
 }
 
-function delOriginServer() {
+function delRemoteBranch() {
+  cd ~/Projects/$work && git branch -a
+  echo -e "\nEnter name of remote branch to delete"
+  echo -e "${Bgre}"
+  read -p "[DEL> " remoteBranch
+  echo -e "${end}"
+  cd ~/Projects/$work && git push origin --delete $remoteBranch
+  echo -e "${gre}Removing '$branch' remote branch ... [done]${end}"
+  sleep 0.35
+  allDone
+}
+
+function delIdServer() {
   #list remote branch
   cd ~/Projects/$work && git remote
   echo -e "\nEnter name of the server to delete"
@@ -359,7 +358,8 @@ function delOriginServer() {
   echo -e "${end}"
   cd ~/Projects/$work && git remote remove $server
   echo -e "${gre}Server '$server' deleted ... [done]${end}"
-  sleeping 0.35
+  sleep 0.35
+  serverIdList
   allDone
 }
 
@@ -371,7 +371,7 @@ function switch() {
   echo -e "${end}"
   cd ~/Projects/$work && git checkout $branch
   echo -e "${gre}Switched to '$branch' ... [done]${end}"
-  sleeping 0.35
+  sleep 0.35
   allDone
 }
 
@@ -383,25 +383,30 @@ function listBranch() {
   allDone
 }
 
+function mainBranchInput() {
+  echo -e "\nEnter your main branch name (default = main)"
+  echo -e "${Bgre}"
+  read -p "[MAIN> " mainBranch
+  echo -e "${end}"
+}
+
 # TODO: test | fix
 function push() {
   #push syntax
   echo -e "${cya}[PUSH syntax]"
-  echo -e "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~${end}"
-  echo -e "<origin-id> <branch> => ${Igry} send data to the machine named '<origin-id>' of branch '<branch>' of the repository attached to '<server> '${end}"
-  echo -e "${cya}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n${end}"
-  push="n/a"
+  echo -e "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~${end}"
+  echo -e "<server-id> <branch> =>${Igry} send data to the server named <server-id> \nof branch <branch> of the repository attached to <server>${end}"
+ echo -e "${cya}current server:${end} $server" 
+echo -e "${cya}current server-id:${end} $origin"
+ echo -e "${cya}current branch:${end} $branch"
+  echo -e "${cya}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n${end}"
 
-  while [ ! $push = "q" ]; do
-    echo -e "${gry}\n'q' to exit push ...${end}"
+
     echo -e "${Bgre}"
     read -p "[PUSH> " push
     echo -e "${end}"
-    if [ $push = "q" ]; then
-      break
-    fi
+
     cd ~/Projects/$work && git push $push
-  done
 
   allDone
 }
@@ -410,21 +415,19 @@ function push() {
 function pull() {
   #pull syntax
   echo -e "${cya}[PULL syntax]"
-  echo -e "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~${end}"
-  echo -e "<origin-id> <branch> => ${Igry} retrieve data to the machine named '<origin-id>' from branch '<branch>' of the repository attached to '<server> '${end}"
-  echo -e "${cya}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~\n${end}"
-  pull="n/a"
+  echo -e "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~${end}"
+  echo -e "<server-id> <branch> =>${Igry} receive data from <branch> remote branch \nof the repository attached to <server>${end}"
+ echo -e "${cya}current server:${end} $server" 
+echo -e "${cya}current server-id:${end} $origin"
+ echo -e "${cya}current branch:${end} $branch"
+  echo -e "${cya}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n${end}"
 
-  while [ ! $pull = "q" ]; do
-    echo -e "${gry}\n'q' to exit pull ...${end}"
+
     echo -e "${Bgre}"
     read -p "[PULL> " pull
     echo -e "${end}"
-    if [ $pull = "q" ]; then
-      break
-    fi
+
     cd ~/Projects/$work && git pull $pull
-  done
 
   allDone
 }
@@ -491,18 +494,22 @@ function upstream() {
   allDone
 }
 
-function originList() {
-  echo -e "${bold}\n[ORIGIN LIST (used)]-------------------------------------------------------- ${end}"
+function serverIdList() {
+  echo -e "${bold}\n[ORIGIN LIST (used)]-------------------------------------- ${end}"
   cd ~/Projects/$work && git remote -v
-  echo -e "${bold}---------------------------------------------------------------------------- ${end}"
+  echo -e "${bold}---------------------------------------------------------- ${end}"
 
-  allDone
+allDone
 }
 
-function originRename() {
-  echo -e "${bold}\n[ORIGIN LIST (used)]-------------------------------------------------------- ${end}"
+function serverIdList0() {
+  echo -e "${bold}\n[ORIGIN LIST (used)]-------------------------------------- ${end}"
   cd ~/Projects/$work && git remote -v
-  echo -e "${bold}---------------------------------------------------------------------------- ${end}"
+  echo -e "${bold}---------------------------------------------------------- ${end}"
+}
+
+function serverIdRename() {
+  serverIdList0
   echo ""
   echo -e "Enter origin ID (to rename)"
   echo -e "${Bgre}"
@@ -519,49 +526,39 @@ function originRename() {
   echo -e "${gre}rename '$oldOrigin' to '$newOrigin' ... [done]${end}"
   sleep 0.35
 
-  echo -e "${bold}\n[ORIGIN LIST (used)]-------------------------------------------------------- ${end}"
-  cd ~/Projects/$work && git remote -v
-  echo -e "${bold}---------------------------------------------------------------------------- ${end}"
+  serverIdList0
 
   allDone
 }
 
 # TODO: test
 function validation() {
-  echo -e "\n >>> VALIDATION <<<"
+  echo -e "${Bcya}\n >>> VALIDATION <<<${end}"
   sleep 0.5
+
+  mainBranchInput
 
   #first pull
   echo ""
-  cd ~/Projects/$work && git pull $origin master
-  echo -e "${gre}pull verification ... [done]${end}"
-  sleep 0.35
+  cd ~/Projects/$work && git pull $origin $mainBranch
+	
+  #create README.md
+  cd ~/Projects/$work && touch README.md
 
-  #status & add & commit & push (master)
-  echo ""
-  cd ~/Projects/$work && git status
-  echo -e "${gre}Check status ... [done]${end}"
-  sleep 0.35
-
+  #status & add & commit & push 
   echo ""
   cd ~/Projects/$work && git add *
-  echo -e "${gre}Add all ... [done]${end}"
-  sleep 0.35
 
   echo ""
   cd ~/Projects/$work && git status
-  echo -e "${gre}Check status ... [done]${end}"
-  sleep 0.35
 
   echo ""
   cd ~/Projects/$work && git commit -m '1st commit'
-  echo -e "${gre}1st commit ... [done]${end}"
-  sleep 0.35
 
   echo ""
-  cd ~/Projects/$work && git push $origin master
-  echo -e "${gre}VALIDATION ... [done]${end}"
-  sleep 0.35
+  cd ~/Projects/$work && git push $origin $mainBranch
+  echo -e "${gre}VALIDATION (1st commit) ... [done]${end}"
+  sleep 1
 
   allDone
 }
@@ -576,12 +573,12 @@ work="n/a"
 server="127.0.0.1"
 branch="n/a"
 
-#create 'Projects' folder
+#create working directory
 mkdir -p ~/Projects
 
 while [ true ]; do
   echo -e "\n"
-  echo -e "${Bred}            GITVERS-TOOL${end}"
+  echo -e "${Bred}                    GITVERS-TOOL${end}"
   sleep 1
   echo "========================================================="
   echo -e "${yel}Version: 2.0.0"
@@ -590,55 +587,56 @@ while [ true ]; do
   #sleep 0.5
   git --version
   #sleep 0.5
-  echo -e "${red}------------[PROJECTS]------------${end}"
+  echo -e "${red}------------[PROJECTS]-----------${end}"
   #sleep 0.5
   listProj
   echo -e "${red}-------------[INIT]--------------${end}"
   #sleep 0.5
   echo -e "${mag}<START>${end}"
-  echo -e "${blu}0.${end} Working on a git project"
-  echo -e "${blu}1.${end} Clone git project"
-  echo -e "${blu}2.${end} Configure your git profile"
-  echo -e "${blu}3.${end} Create git project"
+  echo -e "${blu}work.${end} Working on a git project"
+  echo -e "${blu}clone.${end} Clone git project"
+  echo -e "${blu}config.${end} Configure your git profile"
+  echo -e "${blu}create.${end} Create git project"
   echo -e "${mag}<SSH>${end}"
-  echo -e "${blu}4.${end} Generate SSH key"
-  echo -e "${blu}5.${end} Show your public key"
-  echo -e "${blu}6.${end} Add your SSH key to a remote machine"
-  echo -e "${blu}7.${end} SSH config of current machine"
+  echo -e "${blu}sshgen.${end} Generate SSH key"
+  echo -e "${blu}myssh.${end} Show your public key"
+  echo -e "${blu}sshauth.${end} Add your SSH key to another computer"
+  echo -e "${blu}sshconf.${end} SSH config"
   echo -e "${blu}${red}-------------[GIT]---------------${end}"
   #sleep 0.5
   echo -e "${mag}<BASICS>${end}"
-  echo -e "${blu}s.${end} git status ${Igry}[see your project status]${end}"
-  echo -e "${blu}l.${end} git log ${Igry}[view your project history]${end}"
-  echo -e "${blu}c.${end} git commit ${Igry}[commit your changes]${end}"
-  echo -e "${blu}m.${end} git merge ${Igry}[merge branch to master]${end}"
-  echo -e "${blu}df.${end} git diff ${Igry}[difference between 2 file states]${end}"
+  echo -e "${blu}c.${end} Git commit ${Igry}[commit your changes]${end}"
+  echo -e "${blu}l.${end} Git log ${Igry}[view your project history]${end}"
+  echo -e "${blu}s.${end} Git status ${Igry}[see your project status]${end}"
+  echo -e "${blu}merge.${end} Git merge ${Igry}[merge to main branch]${end}"
+  echo -e "${blu}diff.${end} Git diff ${Igry}[difference between 2 file states]${end}"
   echo -e "${mag}<BRANCH>${end}"
   echo -e "${blu}cbr.${end} Create branch ${Igry}[create new branch]${end}"
-  echo -e "${blu}dbr.${end} Delete branch ${Igry}[delete branch]${end}"
+  echo -e "${blu}dbr.${end} Delete local branch ${Igry}[delete local branch]${end}"
+  echo -e "${blu}drbr.${end} Delete remote branch ${Igry}[delete remote branch]${end}"
   echo -e "${blu}sbr.${end} Switch branch ${Igry}[move to another branch]${end}"
-  echo -e "${blu}lbr.${end} List branch (local + remote) ${Igry}[list all existing branches]${end}"
+  echo -e "${blu}lbr.${end} List branch ${Igry}[list all existing branches]${end}"
   echo -e "${mag}<REMOTE>${end}"
-  echo -e "${blu}push.${end} Send data ${Igry}[send your data to server]${end}"
-  echo -e "${blu}pull.${end} Receive data ${Igry}[receive data from server]${end}"
+  echo -e "${blu}push.${end} Send data ${Igry}[send your data to remote repository]${end}"
+  echo -e "${blu}pull.${end} Receive data ${Igry}[receive data from remote repository]${end}"
   echo -e "${blu}update.${end} Fast forward ${Igry}[update local and remote repository]${end}"
-  echo -e "${mag}<ORIGIN|SERVER>${end}"
-  echo -e "${blu}lorg.${end} List origin ${Igry}[list origin id of current repository]${end}"
-  echo -e "${blu}norg.${end} Rename origin ${Igry}[rename origin id of current repository]${end}"
-  echo -e "${blu}dorg.${end} Delete origin|server ${Igry}[delete server]${end}"
-  echo -e "${mag}<COMMIT>${end}"
+  echo -e "${mag}<SERVER>${end}"
+  echo -e "${blu}lserv.${end} List server-id ${Igry}[list server id of current repository]${end}"
+  echo -e "${blu}nserv.${end} Rename server-id ${Igry}[rename server id of current repository]${end}"
+  echo -e "${blu}dserv.${end} Delete server-id ${Igry}[delete server id of current repository]${end}"
+  echo -e "${mag}<VALIDATION>${end}"
   echo -e "${blu}valid.${end} Valid new git project ${Igry}[validate newly created git project]${end}"
   echo -e "${red}------------[OTHERS]-------------${end}"
   #sleep 0.5
-  echo -e "${blu}77.${end} Purge ${Igry}[delete git project cleanly]${end}"
-  echo -e "${blu}88.${end} Backup ${Igry}[create a backup of your git projects]${end}"
-  echo -e "${blu}99.${end} EXIT"
+  echo -e "${blu}purge.${end} Purge ${Igry}[delete git project cleanly]${end}"
+  echo -e "${blu}bck.${end} Backup ${Igry}[create a backup of your git projects]${end}"
+  echo -e "${blu}exit.${end} EXIT"
   echo "========================================================="
   if [ $work = "n/a" ]; then
-    echo -e "${yel}[STATUS] =>${end} work: $work ${yel}|${end} branch: $branch ${yel}|${end} origin-id: $origin \nserver: $server"
+    echo -e "${yel}[STATUS] =>${end} work: $work ${yel}|${end} branch: $branch ${yel}|${end} server-id: $origin \n${yel}[SERVER] =>${end} $server"
   else
     branch=$(cd ~/Projects/$work && git branch | grep -i '*')
-    echo -e "${yel}[STATUS] =>${end} work: $work ${yel}|${end} branch: $branch ${yel}|${end} origin-id: $origin \nserver: $server"
+    echo -e "${yel}[STATUS] =>${end} work: $work ${yel}|${end} branch: $branch ${yel}|${end} server-id: $origin \n${yel}[SERVER] =>${end} $server"
   fi
 
   echo -e "${Bgre}"
@@ -647,16 +645,23 @@ while [ true ]; do
 
   case $input in
 
-  0)
+  "work")
     echo "Enter your project name..."
     echo -e "${Bgre}"
     read -p "[PROJECT> " work
     echo -e "${end}"
 
-    serverList
+    function serverList() {
+  echo -e "${bold}\n[SERVER LIST (used)]--------------------------------------${end}"
+  tail -n 5 ~/Projects/.server.log
+  echo -e "${Igry}\nNOTE: Enter 'clear' to clear the saved server list ${end}"
+  echo -e "${bold}----------------------------------------------------------${end}"
+}
+	
+	serverList
 
     function serverInput() {
-      echo -e "\nEnter git repository link (SSH/HTTPS)..."
+      echo -e "\nEnter git repository link (SSH)..."
       echo "Example: git@github.com:RajaRakoto/gitvers-tool.git"
       echo -e "${Bgre}"
       read -p "[REPO> " server
@@ -666,14 +671,12 @@ while [ true ]; do
     serverInput
 
     #server log
-    echo "[repository]-> $server" >>~/Projects/$work/tmp/server.log
-    echo -e "${gre}Repository list updated from .server.log ... [done] ${end}"
-    sleep 1
+    echo "[repository]-> $server" >>~/Projects/.server.log
 
     #cleaning server log
     if [ $server = "clear" ] || [ $server = "CLEAR" ]; then
       echo -e "\n"
-      echo "" >~/Projects/$work/tmp/.server.log
+      echo "" >~/Projects/.server.log
       echo -e "${gre}All repository list cleared ... [done] ${end}"
       sleep 0.5
       serverList
@@ -682,44 +685,34 @@ while [ true ]; do
     fi
 
     #def origin
-    echo -e "${bold}\n[ORIGIN LIST (used)]-------------------------------------------------------- ${end}"
-    cd ~/Projects/$work && git remote -v
-    echo -e "${bold}---------------------------------------------------------------------------- ${end}"
     echo ""
     echo "Enter the ID for server => '$server' (default = origin)"
     echo -e "$Bgre"
     read -p "[ID> " origin
     echo -e "$end"
-    echo -e "${gre}Define server ID to '$origin' ... [done]${end}"
     echo ""
 
     #origin
-    echo -e "${gre}Config origin ... [done] ${end}"
-    sleep 0.5
     cd ~/Projects/$work && git remote add $origin $server
 
     #checking
     cd ~/Projects/$work && git remote -v
-    echo -e "${gre}Checking origin ... [done] ${end}"
+    echo -e "${gre}Config & checking origin ... [done] ${end}"
     sleep 1
-    echo -e "${Bgre}\nAll remote config ... [done] ${end}"
-    sleep 1.5
     allDone
     ;;
 
-  1)
+  "clone")
     clone
     ;;
 
-  2)
+  "config")
     config
     ;;
 
-  3)
+  "create")
     #create projects directory
     mkdir -p ~/Projects
-    echo -e "\n${gre}Generate '~/Projects' directory ... [done] ${end}"
-    echo -e "\n"
 
     #project name
     echo -e "${bold}\nNo space on project name ... ${end}"
@@ -727,24 +720,23 @@ while [ true ]; do
     read -p "[PROJET> " projectName
     echo -e "${end}"
     cd ~/Projects/ && mkdir -p $projectName
-    echo -e "Generate project '$projectName' directory ... [done] ${end}"
     sleep 1
     create
     ;;
 
-  4)
+  "sshgen")
     genssh
     ;;
 
-  5)
+  "myssh")
     pubkey
     ;;
 
-  6)
+  "sshauth")
     authorized_keys
     ;;
 
-  7)
+  "sshconf")
     sshConfig
     ;;
 
@@ -760,11 +752,11 @@ while [ true ]; do
     commit
     ;;
 
-  "m")
+  "merge")
     merge
     ;;
 
-  "df")
+  "diff")
     diff
     ;;
 
@@ -774,6 +766,10 @@ while [ true ]; do
 
   "dbr")
     delBranch
+    ;;
+
+  "drbr")
+    delRemoteBranch
     ;;
 
   "sbr")
@@ -796,33 +792,28 @@ while [ true ]; do
     upstream
     ;;
 
-  "lorg")
-    originList
+  "lserv")
+    serverIdList
     ;;
 
-  "norg")
-    originRename
+  "nserv")
+    serverIdRename
     ;;
 
-  "dorg")
-    delOriginServer
+  "dserv")
+    delIdServer
     ;;
 
   "valid")
     validation
     ;;
 
-  77)
+  "purge")
     purge
     ;;
 
-  88)
+  "bck")
     backup
-    ;;
-
-  99)
-    echo "Thank you for using gitvers-tool, see you soon!"
-    break
     ;;
 
   "exit")
