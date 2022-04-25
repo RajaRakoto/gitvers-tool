@@ -104,12 +104,7 @@ chmod +x gitvers-tool.sh
 
 #### `⚫ Presentation`
 
-<img src="https://github.com/RajaRakoto/github-docs/blob/master/gitvers-tool/project-lists.png?raw=true
-" width="300"> <br> <img src="https://github.com/RajaRakoto/github-docs/blob/master/gitvers-tool/illustration.png?raw=true
-" width="700"> <br><img src="https://github.com/RajaRakoto/github-docs/blob/master/gitvers-tool/status1.png?raw=true
-" width="700"> <br><img src="https://github.com/RajaRakoto/github-docs/blob/master/gitvers-tool/status2.png?raw=true
-" width="700"> <br><img src="https://github.com/RajaRakoto/github-docs/blob/master/gitvers-tool/inputArea.png?raw=true
-" width="700">
+<img src="https://github.com/RajaRakoto/github-docs/blob/master/gitvers-tool/project-lists.png?raw=true" width="300"> <br> <img src="https://github.com/RajaRakoto/github-docs/blob/master/gitvers-tool/illustration.png?raw=true" width="700"> <br><img src="https://github.com/RajaRakoto/github-docs/blob/master/gitvers-tool/status1.png?raw=true" width="700"> <br><img src="https://github.com/RajaRakoto/github-docs/blob/master/gitvers-tool/status2.png?raw=true" width="700"> <br><img src="https://github.com/RajaRakoto/github-docs/blob/master/gitvers-tool/inputArea.png?raw=true" width="700">
 
 <br>
 
@@ -117,8 +112,7 @@ chmod +x gitvers-tool.sh
 
 Here is a snippet of using gitvers-tool, you can also do other things like `pull`, `fast forward`, `merge branches`, `clone projects`, and many more. Don't hesitate to contact me if you have any questions.
 
-<img src="https://github.com/RajaRakoto/github-docs/blob/master/gitvers-tool/gitvers-demo.gif?raw=true
-" width="700">
+<img src="https://github.com/RajaRakoto/github-docs/blob/master/gitvers-tool/gitvers-demo.gif?raw=true" width="700">
 
 <br>
 <hr>
@@ -136,8 +130,7 @@ $ sudo -H npm install -g ungit
 
 - **Tuto**: If you want a full tutorial from UNGIT (in FR) -> https://grafikart.fr/tutoriels/ungit-437
 
-<img src="https://github.com/RajaRakoto/github-docs/blob/master/gitvers-tool/ungit-illustration.png?raw=true
-" width=700>
+<img src="https://github.com/RajaRakoto/github-docs/blob/master/gitvers-tool/ungit-illustration.png?raw=true" width="700">
 
 <br>
 
