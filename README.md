@@ -91,7 +91,7 @@ You should at least know the basics and concept of using git to use this script,
 #### `⚫ Run`
 
 ```bash
-cd gitvers-tool.sh
+cd gitvers-tool
 ```
 
 ```bash
