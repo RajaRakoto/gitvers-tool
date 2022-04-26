@@ -62,9 +62,9 @@
 
 **gitvers-tool** is a minimalist script made in `bash` to facilitate the use of `git`, thanks to this script, you save a significant amount of time because a single command from this script can replace several commands typed manually ... Note that this script is recommended for a `small project` but not ideal for a large project.
 
-You should at least know the basics and concept of using git to use this script, otherwise don't try to use it to avoid problems. Obviously you need to have git installed on your machine to use it... Before we get to the nitty-gritty, I want to clarify that this script `generates a directory as a reference point` for all its uses, it can be located in your home `~/Project` folder
+You should at least know the basics and concept of using git to use this script, otherwise don't try to use it to avoid problems. Obviously you need to have git installed on your machine to use it... Before we get to the nitty-gritty, I want to clarify that this script `generates a directory as a reference point` for all its uses, it can be located in your home `~/Projects` folder
 
-> **WARNING**: if your project is outside `~/Project` it will not be taken into account by the gitvers-tool script
+> **WARNING**: if your project is outside `~/Projects` it will not be taken into account by the gitvers-tool script
 
 <br>
 
