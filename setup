@@ -1,0 +1,8 @@
+#!/bin/bash
+echo -e "\n+++ GITVERS-TOOL INSTALLATION +++"
+sleep 1
+sudo curl https://raw.githubusercontent.com/RajaRakoto/gitvers-tool/master/gitvers-tool > gitvers-tool
+sudo chmod a+rx gitvers-tool
+sudo mv gitvers-tool /usr/local/bin/
+sleep 1
+gitvers-tool
