@@ -29,11 +29,12 @@
 <tr>
 <td>
 
-**[📌 Use](#-use)**
+**[📌 USAGE](#-usage)**
 
 </td>
 <td>
 - Clone<br>
+- cURL installation<br>
 - Run<br>
 - Presentation<br>
 - Demo
@@ -78,12 +79,20 @@ You should at least know the basics and concept of using git to use this script,
 <hr>
 <br>
 
-# `📌 USE`
+# `📌 USAGE`
 
 #### `⚫ Clone`
 
 ```bash
- $ git clone --depth 1 https://github.com/RajaRakoto/gitvers-tool
+git clone --depth 1 https://github.com/RajaRakoto/gitvers-tool
+```
+
+#### `⚫ cURL installation`
+
+<br>
+
+```bash
+curl https://raw.githubusercontent.com/RajaRakoto/gitvers-tool/master/setup > setup && chmod +x setup && ./setup
 ```
 
 <br>
@@ -91,15 +100,13 @@ You should at least know the basics and concept of using git to use this script,
 #### `⚫ Run`
 
 ```bash
-cd gitvers-tool
+cd gitvers-tool && chmod +x gitvers-tool.sh && ./gitvers-tool.sh
 ```
 
-```bash
-chmod +x gitvers-tool.sh
-```
+or (after cURL installation)
 
 ```bash
-./gitvers-tool.sh
+gitvers-tool
 ```
 
 <br>
