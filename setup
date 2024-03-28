@@ -1,8 +1,22 @@
 #!/bin/bash
+
 echo -e "\n+++ GITVERS-TOOL INSTALLATION +++"
+
+# download gitvers-tool from repository
 sleep 1
 sudo curl https://raw.githubusercontent.com/RajaRakoto/gitvers-tool/master/gitvers-tool > gitvers-tool
+
+# set access
 sudo chmod a+rx gitvers-tool
+echo "set access ... [done]"
+
+# to exact path
 sudo mv gitvers-tool /usr/local/bin/
+echo "INSTALLATION COMPLETED ! ... [done]"
+
+# test
 sleep 1
-gitvers-tool
+gitvers-tool 
+
+# clear
+rm -rf setup
