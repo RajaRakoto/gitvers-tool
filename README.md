@@ -14,11 +14,17 @@
 
 ### 📌 Usage
 
+Run the following command to install gitvers-tool (Linux only):
+
 ```bash
 curl https://raw.githubusercontent.com/RajaRakoto/gitvers-tool/master/setup > setup && chmod +x setup && ./setup
 ```
 
-> **gitvers-tool** works with `MS Windows`, just install [gitbash](https://github.com/git-for-windows/git/releases) for it to work on windows
+Uninstall gitvers-tool (Linux only):
+
+```bash
+sudo rm -r /usr/local/bin/gitvers-tool
+```
 
 ---
 
