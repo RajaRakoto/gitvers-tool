@@ -1,6 +1,6 @@
 # gitvers-tool 🟠
 
-[![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/for-you.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/open-source.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/uses-git.svg)](https://forthebadge.com) [![forthebadge](https://github.com/RajaRakoto/github-docs/blob/master/badge/build-by.svg?raw=true)](https://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/for-you.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/open-source.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/uses-git.svg)](https://forthebadge.com) [![forthebadge](https://rajarakoto.github.io/github-docs/badge/build-by.svg)](https://forthebadge.com)
 
 ![Git](https://img.shields.io/badge/-Git-777?style=flat&logo=git&logoColor=F05032&labelColor=ffffff) ![Gitub](https://img.shields.io/badge/-Gitub-777?style=flat&logo=github&logoColor=777&labelColor=ffffff)
 
@@ -26,7 +26,7 @@ sudo rm -r /usr/local/bin/gitvers-tool
 
 ### 📌 Guide
 
-<img src="https://github.com/RajaRakoto/github-docs/blob/master/gitvers-tool/project-lists.png?raw=true" width="300"> <br> <img src="https://github.com/RajaRakoto/github-docs/blob/master/gitvers-tool/illustration.png?raw=true" width="700"> <br><img src="https://github.com/RajaRakoto/github-docs/blob/master/gitvers-tool/status1.png?raw=true" width="700"> <br><img src="https://github.com/RajaRakoto/github-docs/blob/master/gitvers-tool/status2.png?raw=true" width="700"> <br><img src="https://github.com/RajaRakoto/github-docs/blob/master/gitvers-tool/inputArea.png?raw=true" width="700">
+<img src="https://rajarakoto.github.io/github-docs/gitvers-tool/project-lists.png" width="300"> <br> <img src="https://rajarakoto.github.io/github-docs/gitvers-tool/illustration.png" width="700"> <br><img src="https://rajarakoto.github.io/github-docs/gitvers-tool/status1.png" width="700"> <br><img src="https://rajarakoto.github.io/github-docs/gitvers-tool/status2.png" width="700"> <br><img src="https://rajarakoto.github.io/github-docs/gitvers-tool/inputArea.png" width="700">
 
 ---
 
@@ -34,7 +34,7 @@ sudo rm -r /usr/local/bin/gitvers-tool
 
 Here is a snippet of using gitvers-tool, you can also do other things like `pull`, `fast forward`, `merge branches`, `clone projects`, and many more ...
 
-<img src="https://github.com/RajaRakoto/github-docs/blob/master/gitvers-tool/gitvers-demo.gif?raw=true" width="1000">
+<img src="https://rajarakoto.github.io/github-docs/gitvers-tool/gitvers-demo.gif" width="1000">
 
 ---
 
@@ -46,8 +46,8 @@ Here is a snippet of using gitvers-tool, you can also do other things like `pull
 $ sudo -H npm install -g ungit
 ```
 
-<img src="https://github.com/RajaRakoto/github-docs/blob/master/gitvers-tool/ungit-illustration.png?raw=true" width="700">
+<img src="https://rajarakoto.github.io/github-docs/gitvers-tool/ungit-illustration.png" width="700">
 
 <br>
 
-**Performing a commit, the advantage with ungit is that you can more easily select the file to commit** <br> <img src="https://github.com/RajaRakoto/github-docs/blob/master/gitvers-tool/ungit-commit.png?raw=true" width="500"> <br>**To display the modification made to a file** <br> <img src="https://github.com/RajaRakoto/github-docs/blob/master/gitvers-tool/ungit-diff.png?raw=true" width="500"> <br>**To change branches and merge one branch to another** <br> <img src="https://github.com/RajaRakoto/github-docs/blob/master/gitvers-tool/ungit-merge.gif?raw=true" width="500"> <br>**To deploy a modification on the remote server (push)** <br> <img src="https://github.com/RajaRakoto/github-docs/blob/master/gitvers-tool/ungit-push.gif?raw=true" width="500"> <br>**To quickly edit the .gitignore file** <br> <img src="https://github.com/RajaRakoto/github-docs/blob/master/gitvers-tool/ungit-ignore.png?raw=true" width="500">
+**Performing a commit, the advantage with ungit is that you can more easily select the file to commit** <br> <img src="https://rajarakoto.github.io/github-docs/gitvers-tool/ungit-commit.png" width="500"> <br>**To display the modification made to a file** <br> <img src="https://rajarakoto.github.io/github-docs/gitvers-tool/ungit-diff.png" width="500"> <br>**To change branches and merge one branch to another** <br> <img src="https://rajarakoto.github.io/github-docs/gitvers-tool/ungit-merge.gif" width="500"> <br>**To deploy a modification on the remote server (push)** <br> <img src="https://rajarakoto.github.io/github-docs/gitvers-tool/ungit-push.gif" width="500"> <br>**To quickly edit the .gitignore file** <br> <img src="https://rajarakoto.github.io/github-docs/gitvers-tool/ungit-ignore.png" width="500">
