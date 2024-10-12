@@ -570,7 +570,7 @@ while [ true ]; do
   echo -e "${Bred}                     GITVERS-TOOL${end}"
   sleep 1
   echo "========================================================="
-  echo -e "${yel}Version: 2.0.0"
+  echo -e "${yel}Version: 2.0.1"
   #sleep 0.5
   echo -e "Author: Raja"
   #sleep 0.5
