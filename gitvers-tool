@@ -133,7 +133,7 @@ function genssh() {
   echo -e "${Bgre}"
   read -p "[EMAIL> " tag
   echo -e "${end}"
-  ssh-keygen -t rsa -b 4096 -C "$tag"
+  ssh-keygen -t ed25519 -C "$tag"
   echo -e "${gre}Generate ssh-key (private|public) ... [done] ${end}"
   sleep 0.35
   allDone
